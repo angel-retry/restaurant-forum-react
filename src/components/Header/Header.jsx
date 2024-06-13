@@ -36,7 +36,7 @@ const Header = () => {
     }
   ]
   return (
-    <Box bg={'gray.100'} px={4} position={'fixed'} w={'full'}>
+    <Box bg={'gray.100'} px={4} position={'fixed'} zIndex={2} w={'full'}>
       <Flex h={16} alignItems={'center'} justifyContent={'space-between'}>
         <HStack spacing={8} alignItems={'center'}>
           <Box fontSize={'lg'} fontWeight={'bold'}>餐廳論壇</Box>
