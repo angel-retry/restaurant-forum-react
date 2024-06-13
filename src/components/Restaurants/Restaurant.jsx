@@ -4,7 +4,7 @@ import { GoBookmark } from 'react-icons/go'
 
 const Restaurant = () => {
   return (
-    <Card borderRadius='lg' cursor={'pointer'}>
+    <Card borderRadius='lg' cursor={'pointer'} variant='outline'>
       <Box w={'full'} height={'250px'}>
         <Image objectFit={'cover'} w={'full'} h={'full'}
       src='/cover.jpg'
