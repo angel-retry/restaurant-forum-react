@@ -12,7 +12,7 @@ const PageLayout = ({ children }) => {
 
       {canRemderHeader && <Header />}
 
-      <Stack minH={'100vh'}>
+      <Stack minH={'100vh'} pt={canRemderHeader ? 20 : 0}>
         {children}
       </Stack>
 
