@@ -11,7 +11,7 @@ const Restaurant = () => {
       alt='Green double couch with wooden legs'
       />
       </Box>
-      <CardBody p={{ md: 3 }}>
+      <CardBody p={{ base: 2, md: 3 }}>
         <VStack align={'flex-start'}>
           <Flex gap={3} w={'full'} >
             <HStack spacing={2}>

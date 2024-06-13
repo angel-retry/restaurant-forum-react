@@ -11,7 +11,6 @@ const Restaurants = () => {
           lg: 'repeat(4, 1fr)'
         }}
         gap={6}
-        px={3}
       >
         {
           Array.from({ length: 15 }, (_, i) => (
