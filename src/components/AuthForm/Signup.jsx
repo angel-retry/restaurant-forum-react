@@ -18,7 +18,7 @@ const Signup = () => {
         <Input type="password" placeholder='confirmPassword' />
       </FormControl>
       <Button colorScheme={'blue'} variant={'solid'} marginTop={3}>
-        Sign in
+        Sign up
       </Button>
     </>
   )
