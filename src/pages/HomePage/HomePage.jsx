@@ -1,6 +1,7 @@
 import { Button, HStack, Input, Stack } from '@chakra-ui/react'
 import Restaurants from '../../components/Restaurants/Restaurants'
 import CategoryTab from '../../components/CategoryTab/CategoryTab'
+import Pagination from '../../components/Pagination/Pagination'
 
 const HomePage = () => {
   return (
@@ -12,6 +13,7 @@ const HomePage = () => {
 
       <CategoryTab />
       <Restaurants />
+      <Pagination />
     </Stack>
 
   )
