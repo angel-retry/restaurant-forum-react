@@ -1,4 +1,4 @@
-import { Avatar, Button, Card, Grid, Heading, HStack, Stack, Text, VStack } from '@chakra-ui/react'
+import { Avatar, Box, Button, Card, Grid, Heading, HStack, Stack, Text, VStack } from '@chakra-ui/react'
 
 const TopUsersPage = () => {
   return (
@@ -15,6 +15,7 @@ const TopUsersPage = () => {
                 <Text>255</Text>
                 <Text>Followers</Text>
               </VStack>
+              <Box w={'2px'} h={'40px'} bg={'gray.300'}></Box>
               <VStack flex={1}>
                 <Text>255</Text>
                 <Text>Posts</Text>
