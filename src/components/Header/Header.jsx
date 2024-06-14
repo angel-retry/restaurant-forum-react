@@ -6,9 +6,11 @@ import { BiCrown, BiHomeAlt, BiLike } from 'react-icons/bi'
 import { PiNewspaperBold } from 'react-icons/pi'
 import { FaPen } from 'react-icons/fa'
 import { LuPencil } from 'react-icons/lu'
+import useLogout from '../../hooks/useLogout'
 
 const Header = () => {
   const { isOpen, onOpen, onClose } = useDisclosure()
+  const { logout, isLogouting } = useLogout()
 
   const Links = [
     {
@@ -66,7 +68,13 @@ const Header = () => {
             <Avatar name='user' src='/cover.jpg' size={'sm'} />
             <Text>user1</Text>
           </HStack>
-          <Button colorScheme='red' variant='outline' _hover={{ bg: 'red', color: 'white' }}>Logout</Button>
+          <Button
+            colorScheme='red'
+            variant='outline'
+            _hover={{ bg: 'red', color: 'white' }}
+            isLoading={isLogouting}
+            onClick={() => logout()}
+          >Logout</Button>
         </HStack>
       </Flex>
 

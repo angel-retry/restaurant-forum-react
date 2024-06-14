@@ -8,7 +8,7 @@ const AuthPage = () => {
   console.log(isLogin)
 
   return (
-    <Stack minH={'100vh'} direction={'row'}>
+    <Stack h={'100vh'} direction={'row'}>
       <Flex p={8} flex={1} align={'center'} justify={'center'}>
         <Stack spacing={4} w={'full'} maxW={'md'}>
           {
@@ -41,7 +41,8 @@ const AuthPage = () => {
       <Flex flex={1} display={{ base: 'none', md: 'flex' }}>
         <Image
           alt={'Login Image'}
-           w={'100%'}
+          w={'100%'}
+          h={'100%'}
           objectFit={'cover'}
           src='cover.jpg'
         />
