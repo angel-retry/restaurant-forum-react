@@ -1,8 +1,9 @@
 import * as yup from 'yup'
-import { Button, FormControl, FormErrorMessage, Heading, Input, Stack } from '@chakra-ui/react'
+import { Alert, AlertDescription, AlertIcon, AlertTitle, Button, FormControl, FormErrorMessage, Heading, Input, Stack } from '@chakra-ui/react'
 import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import useShowToast from '../../hooks/useShowToast'
+import useSignin from '../../hooks/useSignin'
 
 const schema = yup.object({
   email: yup.string().email('信箱格式不對').required('請填入信箱'),
@@ -11,6 +12,7 @@ const schema = yup.object({
 
 const Login = () => {
   const showToast = useShowToast()
+  const { signin, isSigning, error: errorMessage } = useSignin()
 
   const { register, handleSubmit, formState: { errors } } = useForm({
     reValidateMode: 'onChange',
@@ -19,7 +21,7 @@ const Login = () => {
 
   const onSumbit = async (data) => {
     try {
-      console.log(data)
+      await signin(data)
     } catch (error) {
       return showToast('Error', error.message, 'error')
     }
@@ -54,12 +56,21 @@ const Login = () => {
             />
              <FormErrorMessage>{errors.password?.message}</FormErrorMessage>
           </FormControl>
+          {errorMessage && (
+            <Alert status='error'>
+              <AlertIcon />
+              <AlertTitle>Error</AlertTitle>
+              <AlertDescription fontWeight={'bold'}>{errorMessage}</AlertDescription>
+            </Alert>
+          )}
+
           <Button
             colorScheme={'blue'}
             variant={'solid'}
             marginTop={3}
             onClick={handleSubmit(onSumbit, onError)}
             isDisabled={errors?.email || errors?.password}
+            isLoading={isSigning}
           >
             Sign in
           </Button>
