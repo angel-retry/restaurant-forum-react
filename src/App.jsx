@@ -7,6 +7,7 @@ import TopRestaurantPage from './pages/TopRestaurantPage/TopRestaurantPage'
 import TopUsersPage from './pages/TopUsersPage/TopUsersPage'
 import FeedsPage from './pages/FeedsPage/FeedsPage'
 import ProfilePage from './pages/ProfilePage/ProfilePage'
+import EditProfilePage from './pages/EditProfilePage/EditProfilePage'
 
 function App () {
   return (
@@ -18,6 +19,7 @@ function App () {
         <Route path='/restaurants/top' element={<TopRestaurantPage />} />
         <Route path='/restaurants/feeds' element={<FeedsPage />} />
         <Route path='/users/:userId' element={<ProfilePage />} />
+        <Route path='/users/:userId/edit' element={<EditProfilePage />} />
       </Routes>
     </PageLayout>
   )

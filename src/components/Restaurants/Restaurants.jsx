@@ -7,8 +7,7 @@ const Restaurants = () => {
         templateRows='repeat(1, 1fr)'
         templateColumns={{
           sm: 'repeat(1, 1fr)',
-          md: 'repeat(3, 1fr)',
-          lg: 'repeat(4, 1fr)'
+          md: 'repeat(3, 1fr)'
         }}
         gap={6}
       >
