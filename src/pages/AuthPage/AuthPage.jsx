@@ -41,6 +41,7 @@ const AuthPage = () => {
       <Flex flex={1} display={{ base: 'none', md: 'flex' }}>
         <Image
           alt={'Login Image'}
+           w={'100%'}
           objectFit={'cover'}
           src='cover.jpg'
         />
