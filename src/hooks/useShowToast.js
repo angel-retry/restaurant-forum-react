@@ -4,10 +4,10 @@ import { useCallback } from 'react'
 const useShowToast = () => {
   const toast = useToast()
 
-  const showToast = useCallback((title, message, status) => {
+  const showToast = useCallback((title, description, status) => {
     toast({
       title,
-      description: message,
+      description,
       status,
       duration: 3000,
       isClosable: true
