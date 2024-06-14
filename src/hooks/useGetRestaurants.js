@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react'
 import baseURL from '../config/apiConfig'
 import axios from 'axios'
 import useAuthTokenStore from '../store/authTokenStore'
-import useShowToast from './useShowToast'
 import useRestaurantsStore from '../store/restaurantsStore'
 
 const useGetRestaurants = () => {
@@ -10,7 +9,6 @@ const useGetRestaurants = () => {
   const authToken = useAuthTokenStore(state => state.authToken)
   console.log(authToken)
   const URL = `${baseURL}/restaurants`
-  const showToast = useShowToast()
   const { restaurants, setRestaurants } = useRestaurantsStore()
 
   useEffect(() => {
