@@ -4,6 +4,8 @@ import DrawerNavLink from './DrawerNavLink'
 import { Link as RouterLink } from 'react-router-dom'
 import { BiCrown, BiHomeAlt, BiLike } from 'react-icons/bi'
 import { PiNewspaperBold } from 'react-icons/pi'
+import { FaPen } from 'react-icons/fa'
+import { LuPencil } from 'react-icons/lu'
 
 const Header = () => {
   const { isOpen, onOpen, onClose } = useDisclosure()
@@ -54,11 +56,17 @@ const Header = () => {
           onClick={isOpen ? onClose : onOpen}
         />
         <HStack spacing={5} display={{ base: 'none', md: 'flex' }}>
+          <Button colorScheme='green' variant={'outline'} gap={'3'} _hover={{ bg: 'green', color: 'white' }}>
+            <FaPen size={'16px'} />
+            <Box display={{ md: 'none', lg: 'flex' }}>
+            建立餐廳
+            </Box>
+          </Button>
           <HStack spacing={3}>
             <Avatar name='user' src='/cover.jpg' size={'sm'} />
             <Text>user1</Text>
           </HStack>
-          <Button colorScheme='red' variant='outline'>Logout</Button>
+          <Button colorScheme='red' variant='outline' _hover={{ bg: 'red', color: 'white' }}>Logout</Button>
         </HStack>
       </Flex>
 
@@ -93,6 +101,26 @@ const Header = () => {
                     fontWeight={'bold'}
                   >
                   user
+                  </Text>
+                </Link>
+                <Link
+                  as={RouterLink}
+                  display={'flex'}
+                  alignItems={'center'}
+                  justifyContent={'flex-start'}
+                  gap={5}
+                  py={15}
+                  px={5}
+                  _hover={{ bgColor: 'gray.100' }}
+                  w={'full'}
+                >
+                  <Box flex={0.5} display={'flex'} justifyContent={'center'}>
+                    <LuPencil fontSize={20} />
+                  </Box>
+                  <Text flex={2}
+                    fontWeight={'bold'}
+                  >
+                  新建餐廳
                   </Text>
                 </Link>
                 {Links.map((link) => (

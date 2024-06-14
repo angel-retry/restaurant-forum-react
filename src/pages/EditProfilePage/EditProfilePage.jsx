@@ -1,4 +1,4 @@
-import { Avatar, Box, Button, FormControl, FormLabel, Heading, HStack, Input, Stack, Textarea, VStack } from '@chakra-ui/react'
+import { Avatar, Button, FormControl, FormLabel, Heading, HStack, Input, Stack, Textarea, VStack } from '@chakra-ui/react'
 
 const EditProfilePage = () => {
   return (
