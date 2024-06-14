@@ -113,6 +113,7 @@ const Header = () => {
                   px={5}
                   _hover={{ bgColor: 'gray.100' }}
                   w={'full'}
+                  to='/restaurants/create'
                 >
                   <Box flex={0.5} display={'flex'} justifyContent={'center'}>
                     <LuPencil fontSize={20} />

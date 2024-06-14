@@ -8,6 +8,7 @@ import TopUsersPage from './pages/TopUsersPage/TopUsersPage'
 import FeedsPage from './pages/FeedsPage/FeedsPage'
 import ProfilePage from './pages/ProfilePage/ProfilePage'
 import EditProfilePage from './pages/EditProfilePage/EditProfilePage'
+import RestaurantFormPage from './pages/RestaurantFormPage/CreateRestaurantPage'
 
 function App () {
   return (
@@ -18,6 +19,7 @@ function App () {
         <Route path='/users/top' element={<TopUsersPage />} />
         <Route path='/restaurants/top' element={<TopRestaurantPage />} />
         <Route path='/restaurants/feeds' element={<FeedsPage />} />
+        <Route path='/restaurants/create' element={<RestaurantFormPage />} /><Route path='/restaurants/:restaurantId/edit' element={<RestaurantFormPage />} />
         <Route path='/users/:userId' element={<ProfilePage />} />
         <Route path='/users/:userId/edit' element={<EditProfilePage />} />
       </Routes>
