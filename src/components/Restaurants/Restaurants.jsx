@@ -1,27 +1,38 @@
 import { Grid, GridItem } from '@chakra-ui/react'
 import Restaurant from './Restaurant'
+import useGetRestaurants from '../../hooks/useGetRestaurants'
 
 const Restaurants = () => {
-  return (
-    <Grid
-        templateRows='repeat(1, 1fr)'
-        templateColumns={{
-          sm: 'repeat(1, 1fr)',
-          md: 'repeat(3, 1fr)'
-        }}
-        gap={6}
-      >
-        {
-          Array.from({ length: 15 }, (_, i) => (
-            <>
-              <GridItem w='100%'>
-                <Restaurant />
-              </GridItem>
-            </>
-          ))
-        }
+  const { restaurants, isLoading } = useGetRestaurants()
 
-      </Grid>
+  const restaurantsData = restaurants.restaurants
+
+  return (
+    <>
+      {
+        !isLoading && (
+          <Grid
+            templateRows='repeat(1, 1fr)'
+            templateColumns={{
+              sm: 'repeat(1, 1fr)',
+              md: 'repeat(3, 1fr)'
+            }}
+            gap={6}
+          >
+            {
+              restaurantsData.map(restaurant => (
+                <GridItem w='100%' key={restaurant.id} >
+                  <Restaurant restaurant={restaurant}/>
+                </GridItem>
+
+              ))
+            }
+
+          </Grid>
+        )
+      }
+    </>
+
   )
 }
 

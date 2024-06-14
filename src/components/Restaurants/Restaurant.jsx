@@ -2,12 +2,12 @@ import { Box, Card, CardBody, Flex, Heading, HStack, Image, Tag, Text, VStack } 
 import { FaRegCommentDots, FaRegHeart } from 'react-icons/fa'
 import { GoBookmark } from 'react-icons/go'
 
-const Restaurant = () => {
+const Restaurant = ({ restaurant }) => {
   return (
     <Card borderRadius='lg' cursor={'pointer'} variant='outline'>
       <Box w={'full'} height={'250px'}>
         <Image objectFit={'cover'} w={'full'} h={'full'}
-      src='/cover.jpg'
+      src={restaurant?.image}
       alt='Green double couch with wooden legs'
       />
       </Box>
@@ -16,22 +16,20 @@ const Restaurant = () => {
           <Flex gap={3} w={'full'} >
             <HStack spacing={2}>
               <FaRegHeart size={22} />
-              <Text fontSize={20}>5</Text>
+              <Text fontSize={20}>{restaurant.LikedUsers.length}</Text>
             </HStack>
             <HStack spacing={2}>
               <FaRegCommentDots size={22} />
-              <Text fontSize={20}>5</Text>
+              <Text fontSize={20}>{restaurant.CommentedUsers.length}</Text>
             </HStack>
             <HStack marginLeft={'auto'} >
               <GoBookmark size={24} />
             </HStack>
           </Flex>
-          <Heading size='md'>Living room Sofa</Heading>
-          <Tag colorScheme={'teal'} size={'md'} variant='solid' py={2}>Sample Tag</Tag>
+          <Heading size='md'>{restaurant.name}</Heading>
+          <Tag colorScheme={'teal'} size={'md'} variant='solid' py={2}>{restaurant.Category.name}</Tag>
           <Text>
-          This sofa is perfect for modern tropical spaces, baroque inspired
-          spaces, earthy toned spaces and for people who love a chic design with a
-          sprinkle of vintage design.
+          {restaurant.introduction}
         </Text>
       </VStack>
       </CardBody>

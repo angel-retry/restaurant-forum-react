@@ -1,8 +1,8 @@
 import { create } from 'zustand'
 
-const restaurantsStore = create(set => ({
+const useRestaurantsStore = create(set => ({
   restaurants: [],
   setRestaurants: restaurants => set({ restaurants })
 }))
 
-export default restaurantsStore
+export default useRestaurantsStore
