@@ -1,4 +1,4 @@
-import { Route, Routes } from 'react-router-dom'
+import { Navigate, Route, Routes } from 'react-router-dom'
 import './App.css'
 import AuthPage from './pages/AuthPage/AuthPage'
 import PageLayout from './components/Laytout/PageLayout'
@@ -10,21 +10,37 @@ import ProfilePage from './pages/ProfilePage/ProfilePage'
 import EditProfilePage from './pages/EditProfilePage/EditProfilePage'
 import RestaurantFormPage from './pages/RestaurantFormPage/CreateRestaurantPage'
 import RestaurantPage from './pages/RestaurantPage/RestaurantPage'
+import useAuthTokenStore from './store/authTokenStore'
 
 function App () {
+  const authToken = useAuthTokenStore(state => state.authToken)
   return (
     <PageLayout>
       <Routes>
-        <Route path='/auth' element={<AuthPage />} />
-        <Route path='/restaurants' element={<HomePage />} />
-        <Route path='/users/top' element={<TopUsersPage />} />
-        <Route path='/restaurants/top' element={<TopRestaurantPage />} />
-        <Route path='/restaurants/feeds' element={<FeedsPage />} />
-        <Route path='/restaurants/create' element={<RestaurantFormPage />} />
-        <Route path='/restaurants/:restaurantId' element={<RestaurantPage />} />
-        <Route path='/restaurants/:restaurantId/edit' element={<RestaurantFormPage />} />
-        <Route path='/users/:userId' element={<ProfilePage />} />
-        <Route path='/users/:userId/edit' element={<EditProfilePage />} />
+        {
+          authToken
+            ? (
+            <>
+            <Route path='/restaurants' element={<HomePage />} />
+            <Route path='/users/top' element={<TopUsersPage />} />
+            <Route path='/restaurants/top' element={<TopRestaurantPage />} />
+            <Route path='/restaurants/feeds' element={<FeedsPage />} />
+            <Route path='/restaurants/create' element={<RestaurantFormPage />} />
+            <Route path='/restaurants/:restaurantId' element={<RestaurantPage />} />
+            <Route path='/restaurants/:restaurantId/edit' element={<RestaurantFormPage />} />
+            <Route path='/users/:userId' element={<ProfilePage />} />
+            <Route path='/users/:userId/edit' element={<EditProfilePage />} />
+            <Route path='*' element={<Navigate to={'/restaurants'}/>} />
+            </>
+              )
+            : (
+            <>
+              <Route path='/auth' element={<AuthPage />} />
+              <Route path='*' element={<Navigate to={'/auth'}/>} />
+            </>
+              )
+        }
+
       </Routes>
     </PageLayout>
   )
