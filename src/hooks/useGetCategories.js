@@ -10,7 +10,7 @@ const useGetCategories = () => {
 
   const URL = `${baseURL}/categories`
   useEffect(() => {
-    isLoading(true)
+    setIsLoading(true)
     const getCategories = () => {
       axios
         .get(URL, {
@@ -33,7 +33,7 @@ const useGetCategories = () => {
     if (authToken) getCategories()
   }, [authToken])
 
-  return { categories }
+  return { categories, isLoading }
 }
 
 export default useGetCategories
