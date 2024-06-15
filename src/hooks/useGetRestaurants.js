@@ -9,10 +9,13 @@ const useGetRestaurants = () => {
   const [isLoading, setIsLoading] = useState(true)
   const authToken = useAuthTokenStore(state => state.authToken)
   console.log(authToken)
-  const URL = `${baseURL}/restaurants`
   const { restaurants, setRestaurants } = useRestaurantsStore()
   const count = usePaginationStore(state => state.count)
   const setCount = usePaginationStore(state => state.setCount)
+  const currentPage = usePaginationStore(state => state.currentPage)
+  console.log(currentPage)
+  const searchPage = `page=${currentPage || null}`
+  const URL = `${baseURL}/restaurants?${searchPage}`
   useEffect(() => {
     const getRestaurants = () => {
       setRestaurants([])
@@ -39,7 +42,7 @@ const useGetRestaurants = () => {
     }
 
     if (authToken) getRestaurants()
-  }, [authToken, setRestaurants, setCount])
+  }, [authToken, setRestaurants, setCount, currentPage])
 
   return { isLoading, restaurants, count }
 }
