@@ -3,6 +3,7 @@ import baseURL from '../config/apiConfig'
 import axios from 'axios'
 import useAuthTokenStore from '../store/authTokenStore'
 import useRestaurantsStore from '../store/restaurantsStore'
+import usePaginationStore from '../store/paginationStore'
 
 const useGetRestaurants = () => {
   const [isLoading, setIsLoading] = useState(true)
@@ -10,7 +11,8 @@ const useGetRestaurants = () => {
   console.log(authToken)
   const URL = `${baseURL}/restaurants`
   const { restaurants, setRestaurants } = useRestaurantsStore()
-
+  const count = usePaginationStore(state => state.count)
+  const setCount = usePaginationStore(state => state.setCount)
   useEffect(() => {
     const getRestaurants = () => {
       setRestaurants([])
@@ -24,7 +26,8 @@ const useGetRestaurants = () => {
         .then(res => {
           const { data } = res
           console.log(data)
-          setRestaurants(data)
+          setRestaurants(data.restaurants)
+          setCount(data.count)
           setIsLoading(false)
         })
         .catch(err => {
@@ -36,9 +39,9 @@ const useGetRestaurants = () => {
     }
 
     if (authToken) getRestaurants()
-  }, [authToken, setRestaurants])
+  }, [authToken, setRestaurants, setCount])
 
-  return { isLoading, restaurants }
+  return { isLoading, restaurants, count }
 }
 
 export default useGetRestaurants

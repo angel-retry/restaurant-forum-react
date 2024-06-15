@@ -1,17 +1,10 @@
 import { Grid, GridItem } from '@chakra-ui/react'
 import Restaurant from './Restaurant'
-import useGetRestaurants from '../../hooks/useGetRestaurants'
-
-const Restaurants = () => {
-  const { restaurants, isLoading } = useGetRestaurants()
-
-  const restaurantsData = restaurants.restaurants
-
+const Restaurants = ({ restaurants }) => {
+  const restaurantsData = restaurants
   return (
     <>
-      {
-        !isLoading && (
-          <Grid
+      <Grid
             templateRows='repeat(1, 1fr)'
             templateColumns={{
               sm: 'repeat(1, 1fr)',
@@ -29,8 +22,6 @@ const Restaurants = () => {
             }
 
           </Grid>
-        )
-      }
     </>
 
   )
