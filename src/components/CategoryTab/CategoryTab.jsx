@@ -1,23 +1,30 @@
-import { Select, Tab, TabList, Tabs } from '@chakra-ui/react'
+import { Button, HStack, Select } from '@chakra-ui/react'
+import useCategoryStore from '../../store/categoryStore'
 const CategoryTab = ({ categories }) => {
+  const { currentCategory, setCurrentCategory } = useCategoryStore()
+
   return (
     <>
-      <Tabs variant='solid-rounded' alignSelf={'center'} colorScheme={'teal'} display={{ base: 'none', md: 'flex' }}>
-        <TabList >
-          <Tab fontSize={{ md: 'xs', lg: 'md' }}>全部</Tab>
-          {
-            categories.map(category => (
-              <Tab key={category.id} fontSize={{ md: 'xs', lg: 'md' }} >{category.name}</Tab>
-            ))
-          }
-        </TabList>
-      </Tabs>
-
-      <Select placeholder='餐廳種類' display={{ base: 'flex', md: 'none' }}>
-        <option >全部</option>
+      <HStack justify={'center'} w={'100%'} display={{ base: 'none', md: 'flex' }}>
+        <Button bg={'transparent'} _active={{ bg: 'teal', color: 'white' }} borderRadius={'full'} isActive={!currentCategory} onClick={() => setCurrentCategory(null) }>全部</Button>
         {
           categories.map(category => (
-              <option key={category.id} >{category.name}</option>
+            <Button
+              key={category.id}
+              bg={'transparent'}
+              _active={{ bg: 'teal', color: 'white' }} borderRadius={'full'}
+              onClick={() => setCurrentCategory(category.id) }
+              isActive={currentCategory === category.id}
+            >{category.name}</Button>
+          ))
+        }
+      </HStack>
+
+      <Select placeholder='餐廳種類' display={{ base: 'flex', md: 'none' }} >
+        <option onClick={() => setCurrentCategory(null)} >全部</option>
+        {
+          categories.map(category => (
+              <option key={category.id} onClick={() => setCurrentCategory(category.id)}>{category.name}</option>
           ))
         }
       </Select>
