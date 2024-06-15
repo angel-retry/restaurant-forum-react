@@ -20,11 +20,16 @@ const CategoryTab = ({ categories }) => {
         }
       </HStack>
 
-      <Select placeholder='餐廳種類' display={{ base: 'flex', md: 'none' }} >
-        <option onClick={() => setCurrentCategory(null)} >全部</option>
+      <Select
+        placeholder='餐廳種類'
+        display={{ base: 'flex', md: 'none' }}
+        onChange={e => setCurrentCategory(e.target.value)}
+        value={currentCategory || null}
+      >
+        <option value={null} >全部</option>
         {
           categories.map(category => (
-              <option key={category.id} onClick={() => setCurrentCategory(category.id)}>{category.name}</option>
+              <option key={category.id} value={category.id}>{category.name}</option>
           ))
         }
       </Select>
