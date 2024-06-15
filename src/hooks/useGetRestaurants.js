@@ -14,8 +14,8 @@ const useGetRestaurants = () => {
   const setCount = usePaginationStore(state => state.setCount)
   const currentPage = usePaginationStore(state => state.currentPage)
   console.log(currentPage)
-  const searchPage = `page=${currentPage || null}`
-  const URL = `${baseURL}/restaurants?${searchPage}`
+  const searchCurrentPage = `page=${currentPage || null}`
+  const URL = `${baseURL}/restaurants?${searchCurrentPage}`
   useEffect(() => {
     const getRestaurants = () => {
       setRestaurants([])
