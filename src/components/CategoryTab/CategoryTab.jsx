@@ -1,7 +1,21 @@
 import { Button, HStack, Select } from '@chakra-ui/react'
 import useCategoryStore from '../../store/categoryStore'
+import useSearchKeyword from '../../store/searchKeyword'
 const CategoryTab = ({ categories }) => {
   const { currentCategory, setCurrentCategory } = useCategoryStore()
+  const setKeyword = useSearchKeyword(state => state.setKeyword)
+
+  const handleClick = (categoryId) => {
+    console.log(categoryId)
+    setKeyword(null)
+    setCurrentCategory(categoryId)
+  }
+
+  const handleChange = (categoryId) => {
+    console.log(categoryId)
+    setKeyword(null)
+    setCurrentCategory(categoryId)
+  }
 
   return (
     <>
@@ -13,7 +27,7 @@ const CategoryTab = ({ categories }) => {
               key={category.id}
               bg={'transparent'}
               _active={{ bg: 'teal', color: 'white' }} borderRadius={'full'}
-              onClick={() => setCurrentCategory(category.id) }
+              onClick={() => handleClick(category.id) }
               isActive={currentCategory === category.id}
             >{category.name}</Button>
           ))
@@ -23,7 +37,7 @@ const CategoryTab = ({ categories }) => {
       <Select
         placeholder='餐廳種類'
         display={{ base: 'flex', md: 'none' }}
-        onChange={e => setCurrentCategory(e.target.value)}
+        onChange={e => handleChange(e.target.value)}
         value={currentCategory || null}
       >
         <option value={null} >全部</option>

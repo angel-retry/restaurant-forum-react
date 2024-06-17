@@ -1,27 +1,16 @@
 import { HStack, Input, Button } from '@chakra-ui/react'
 import { useRef } from 'react'
-import useShowToast from '../../hooks/useShowToast'
+import useSearchKeyword from '../../store/searchKeyword'
+import useCategoryStore from '../../store/categoryStore'
 
-const SearchRestaurant = ({ setSearchRestaurants, setKeyword }) => {
+const SearchRestaurant = () => {
+  const setKeyword = useSearchKeyword(state => state.setKeyword)
+  const setCurrentCategory = useCategoryStore(state => state.setCurrentCategory)
   const searchRef = useRef(null)
-  const showToast = useShowToast()
-
   const handleSubmit = async (e) => {
     e.preventDefault()
-    e.stopPropagation()
-    setSearchRestaurants(null)
-    try {
-      const keyword = searchRef.current.value
-
-      if (!keyword) {
-        showToast('Error', '請填入關鍵字!', 'error')
-      } else {
-        setKeyword(keyword)
-      }
-      console.log(keyword)
-    } catch (error) {
-      console.log(error)
-    }
+    setCurrentCategory(null)
+    setKeyword(searchRef.current.value)
   }
 
   return (

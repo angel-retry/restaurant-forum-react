@@ -14,14 +14,21 @@ const Restaurant = ({ restaurant }) => {
       <CardBody p={{ base: 2, md: 3 }}>
         <VStack align={'flex-start'}>
           <Flex gap={3} w={'full'} >
-            <HStack spacing={2}>
+            {restaurant.LikedUsers && (
+               <HStack spacing={2}>
               <FaRegHeart size={22} />
               <Text fontSize={20}>{restaurant.LikedUsers.length}</Text>
             </HStack>
-            <HStack spacing={2}>
-              <FaRegCommentDots size={22} />
-              <Text fontSize={20}>{restaurant.CommentedUsers.length}</Text>
-            </HStack>
+            )}
+            {
+              restaurant.CommentedUsers && (
+                <HStack spacing={2}>
+                  <FaRegCommentDots size={22} />
+                  <Text fontSize={20}>{restaurant.CommentedUsers.length}</Text>
+                </HStack>
+              )
+            }
+
             <HStack marginLeft={'auto'} >
               <GoBookmark size={24} />
             </HStack>

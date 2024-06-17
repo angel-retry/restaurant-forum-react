@@ -5,6 +5,7 @@ import useAuthTokenStore from '../store/authTokenStore'
 import useRestaurantsStore from '../store/restaurantsStore'
 import usePaginationStore from '../store/paginationStore'
 import useCategoryStore from '../store/categoryStore'
+import useKeywordStore from '../store/searchKeyword'
 
 const useGetRestaurants = () => {
   const [isLoading, setIsLoading] = useState(true)
@@ -16,11 +17,14 @@ const useGetRestaurants = () => {
   const currentPage = usePaginationStore(state => state.currentPage)
   const currentCategory = useCategoryStore(state => state.currentCategory)
   const setCurrentPage = usePaginationStore(state => state.setCurrentPage)
+  const keyword = useKeywordStore(state => state.keyword)
   console.log(currentPage)
   console.log(currentCategory)
   const searchCurrentPage = `page=${currentPage || null}`
   const searchCurrentCategory = `categoryId=${currentCategory || null}`
-  const URL = `${baseURL}/restaurants?${searchCurrentPage}&${searchCurrentCategory}`
+  const searchKeyword = keyword ? `&keyword=${keyword}` : ''
+  const URL = `${baseURL}/restaurants?${searchCurrentPage}&${searchCurrentCategory}${searchKeyword}`
+  console.log({ URL })
 
   useEffect(() => {
     setCurrentPage(1)
@@ -52,7 +56,7 @@ const useGetRestaurants = () => {
     }
 
     if (authToken) getRestaurants()
-  }, [authToken, setRestaurants, setCount, currentPage, currentCategory])
+  }, [authToken, setRestaurants, setCount, currentPage, setCurrentPage, currentCategory, keyword])
 
   return { isLoading, restaurants, count }
 }

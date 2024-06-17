@@ -5,29 +5,22 @@ import Pagination from '../../components/Pagination/Pagination'
 import useGetRestaurants from '../../hooks/useGetRestaurants'
 import useGetCategories from '../../hooks/useGetCategories'
 import SearchRestaurant from '../../components/Search/SearchRestaurant'
-import useSearchRestaurant from '../../hooks/useSearchRestaurant'
-import { useState } from 'react'
 
 const HomePage = () => {
-  const [keyword, setKeyword] = useState('')
-  const { isLoading: isGetting, restaurants, count } = useGetRestaurants()
+  const { isLoading, restaurants, count } = useGetRestaurants()
   const { categories, isLoading: isCategoryLoading } = useGetCategories()
-  const { isLoading: isSearching, searchRestaurants, setSearchRestaurants } = useSearchRestaurant(keyword)
 
-  console.log({ isSearching, isGetting })
-
-  const isLoading = isSearching || isGetting
-  const restaurantsData = searchRestaurants || restaurants
+  console.log({ count })
 
   return (
     <Stack px={3} spacing={5}>
-      <SearchRestaurant setSearchRestaurants={setSearchRestaurants} setKeyword={setKeyword} />
+      <SearchRestaurant />
 
       {!isCategoryLoading && <CategoryTab categories={categories} />}
 
       {!isLoading && (
         <>
-          <Restaurants restaurants={restaurantsData} />
+          <Restaurants restaurants={restaurants} />
           <Pagination count={count} />
         </>
       )}
