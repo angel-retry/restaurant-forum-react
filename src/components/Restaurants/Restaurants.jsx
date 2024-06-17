@@ -1,8 +1,12 @@
-import { Grid, GridItem, Heading, VStack } from '@chakra-ui/react'
+import { Button, Grid, GridItem, Heading, VStack } from '@chakra-ui/react'
 import Restaurant from './Restaurant'
 import { FaRegFileExcel } from 'react-icons/fa'
+import useCategoryStore from '../../store/categoryStore'
+import useSearchKeyword from '../../store/searchKeyword'
 const Restaurants = ({ restaurants }) => {
   const restaurantsData = restaurants
+  const setCurrentCategory = useCategoryStore(state => state.setCurrentCategory)
+  const setKeyword = useSearchKeyword(state => state.setKeyword)
   return (
     <>
       {
@@ -31,6 +35,10 @@ const Restaurants = ({ restaurants }) => {
             <VStack color={'gray.500'} spacing={10} py={100}>
               <FaRegFileExcel size={150} />
               <Heading fontSize={'2xl'}>沒有餐廳資料QQ</Heading>
+              <Button onClick={() => {
+                setKeyword(null)
+                setCurrentCategory(null)
+              }}>回首頁</Button>
             </VStack>
             )
       }

@@ -18,6 +18,7 @@ const useGetRestaurants = () => {
   const currentCategory = useCategoryStore(state => state.currentCategory)
   const setCurrentPage = usePaginationStore(state => state.setCurrentPage)
   const keyword = useKeywordStore(state => state.keyword)
+  const setKeyword = useKeywordStore(state => state.setKeyword)
   console.log(currentPage)
   console.log(currentCategory)
   const searchCurrentPage = `page=${currentPage || null}`
@@ -56,7 +57,7 @@ const useGetRestaurants = () => {
     }
 
     if (authToken) getRestaurants()
-  }, [authToken, setRestaurants, setCount, currentPage, setCurrentPage, currentCategory, keyword])
+  }, [authToken, setRestaurants, setCount, currentPage, setCurrentPage, currentCategory, keyword, setKeyword])
 
   return { isLoading, restaurants, count }
 }

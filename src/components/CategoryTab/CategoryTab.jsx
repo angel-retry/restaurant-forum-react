@@ -11,16 +11,26 @@ const CategoryTab = ({ categories }) => {
     setCurrentCategory(categoryId)
   }
 
-  const handleChange = (categoryId) => {
+  const handleChange = (e) => {
+    const categoryId = e.target.value
     console.log(categoryId)
     setKeyword(null)
-    setCurrentCategory(categoryId)
+    setCurrentCategory(categoryId === 'all' ? null : categoryId)
   }
 
   return (
     <>
       <HStack justify={'center'} w={'100%'} display={{ base: 'none', md: 'flex' }}>
-        <Button bg={'transparent'} _active={{ bg: 'teal', color: 'white' }} borderRadius={'full'} isActive={!currentCategory} onClick={() => setCurrentCategory(null) }>全部</Button>
+        <Button
+        bg={'transparent'}
+        _active={{ bg: 'teal', color: 'white' }}
+        borderRadius={'full'}
+        isActive={!currentCategory}
+        onClick={() => {
+          setKeyword(null)
+          setCurrentCategory(null)
+        } }
+        >全部</Button>
         {
           categories.map(category => (
             <Button
@@ -37,10 +47,10 @@ const CategoryTab = ({ categories }) => {
       <Select
         placeholder='餐廳種類'
         display={{ base: 'flex', md: 'none' }}
-        onChange={e => handleChange(e.target.value)}
-        value={currentCategory || null}
+        onChange={handleChange}
+        value={currentCategory || 'all'}
       >
-        <option value={null} >全部</option>
+        <option value='all' >全部</option>
         {
           categories.map(category => (
               <option key={category.id} value={category.id}>{category.name}</option>
