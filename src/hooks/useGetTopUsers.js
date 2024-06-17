@@ -7,7 +7,7 @@ const useGetTopUsers = () => {
   const [isLoading, setIsLoading] = useState(true)
   const [topUsers, setTopUsers] = useState(null)
   const authToken = useAuthTokenStore(state => state.authToken)
-  const URL = `${baseURL}/users/top`
+  const URL = `${baseURL}/users/top10`
 
   useEffect(() => {
     setIsLoading(true)
