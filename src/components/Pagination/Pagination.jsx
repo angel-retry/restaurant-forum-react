@@ -15,23 +15,29 @@ const Pagination = ({ count }) => {
   }
 
   return (
-    <HStack justify={'center'} >
-      <Button isDisabled={currentPage === 1} onClick={handlePrevPage}>
-        <ArrowLeftIcon boxSize={3} />
-      </Button>
-
+    <>
       {
-        pages.map(page => (
-          <Button key={page} isActive={page === currentPage} onClick={() => setCurrentPage(page)}>
-            {page}
-          </Button>
-        ))
-      }
+        count !== 0 && (
+          <HStack justify={'center'} >
+            <Button isDisabled={currentPage === 1} onClick={handlePrevPage}>
+              <ArrowLeftIcon boxSize={3} />
+            </Button>
 
-      <Button isDisabled={currentPage === totalPage} onClick={handleNextPage} >
-        <ArrowRightIcon boxSize={3} />
-      </Button>
-    </HStack>
+            {
+              pages.map(page => (
+                <Button key={page} isActive={page === currentPage} onClick={() => setCurrentPage(page)}>
+                  {page}
+                </Button>
+              ))
+            }
+
+            <Button isDisabled={currentPage === totalPage} onClick={handleNextPage} >
+              <ArrowRightIcon boxSize={3} />
+            </Button>
+          </HStack>
+        )
+      }
+    </>
   )
 }
 
