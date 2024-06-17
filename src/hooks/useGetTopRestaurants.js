@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import useAuthTokenStore from '../store/authTokenStore'
 import baseURL from '../config/apiConfig'
+import axios from 'axios'
 
 const useGetTopRestaurants = () => {
   const [isLoading, setIsLoading] = useState(true)
@@ -11,11 +12,12 @@ const useGetTopRestaurants = () => {
   useEffect(() => {
     const getTopRestaurants = () => {
       setIsLoading(true)
-      fetch(URL, {
-        headers: {
-          Authorization: `Bearer ${authToken}`
-        }
-      })
+      axios
+        .get(URL, {
+          headers: {
+            Authorization: `Bearer ${authToken}`
+          }
+        })
         .then(res => {
           const { top10Restaurants } = res.data
           setTopRestaurants(top10Restaurants)
@@ -25,7 +27,7 @@ const useGetTopRestaurants = () => {
     }
 
     if (authToken) getTopRestaurants()
-  }, [authToken, topRestaurants])
+  }, [authToken])
 
   return { isLoading, topRestaurants }
 }
