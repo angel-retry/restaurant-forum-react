@@ -19,7 +19,7 @@ const useGetFeedsRestaurants = () => {
             Authorization: `Bearer ${authToken}`
           }
         })
-        .get(res => {
+        .then(res => {
           const { feedsRestaurants } = res.data
           setFeedsRestaurants(feedsRestaurants)
         })
