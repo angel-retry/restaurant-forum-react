@@ -4,15 +4,15 @@ import useUserProfileStore from '../store/userProfileStore'
 import baseURL from '../config/apiConfig'
 import axios from 'axios'
 
-const useGetUserProfile = (useId) => {
+const useGetUserProfile = (userId) => {
   const [isLoading, setIsLoading] = useState(true)
   const authToken = useAuthTokenStore(state => state.authToken)
   const { userProfile, setUserProfile } = useUserProfileStore()
-  const URL = `${baseURL}/users/${useId}`
+  const URL = `${baseURL}/users/${userId}`
 
   useEffect(() => {
+    setIsLoading(true)
     const getUserProfile = () => {
-      setIsLoading(true)
       axios
         .get(URL, {
           headers: {
@@ -32,7 +32,7 @@ const useGetUserProfile = (useId) => {
     }
 
     if (authToken) getUserProfile()
-  }, [isLoading, userProfile])
+  }, [authToken, userId])
 
   return { isLoading, userProfile }
 }

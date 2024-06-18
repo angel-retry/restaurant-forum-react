@@ -2,7 +2,7 @@ import { create } from 'zustand'
 
 const useTabStore = create(set => ({
   currentProfileTab: 'created',
-  setCurrentProfileTab: currentTab => set({ currentTab })
+  setCurrentProfileTab: currentProfileTab => set({ currentProfileTab })
 }))
 
 export default useTabStore
