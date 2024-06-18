@@ -25,7 +25,7 @@ const ProfileHeader = () => {
                 )
           }
           <HStack spacing={5}>
-            <Text>{userProfile.CreatedRestaurants.length} 貼文</Text>
+            <Text>{userProfile.CreatedRestaurants.length} 篇貼文</Text>
             <Text>{userProfile.Followers.length} 位粉絲</Text>
             <Text>{userProfile.Followings.length} 位追蹤中</Text>
           </HStack>
