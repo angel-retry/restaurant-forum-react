@@ -13,7 +13,7 @@ const RestaurantsFeeds = ({ isLoading, restaurants }) => {
             </CardHeader>
 
             <CardBody>
-              <Stack divider={<StackDivider />} spacing='4'>
+              <Stack divider={<StackDivider />} spacing='10'>
               {
                 restaurants.map(restaurant => (
                   <Flex flexDir={{ base: 'column', lg: 'row' }} gap={3} key={restaurant.id}>
@@ -54,7 +54,6 @@ const RestaurantsFeeds = ({ isLoading, restaurants }) => {
                   </Flex>
                 ))
               }
-
               </Stack>
             </CardBody>
           </Card>
