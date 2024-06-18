@@ -14,6 +14,7 @@ import useAuthTokenStore from './store/authTokenStore'
 
 function App () {
   const authToken = useAuthTokenStore(state => state.authToken)
+
   return (
     <PageLayout>
       <Routes>

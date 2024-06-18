@@ -8,9 +8,10 @@ const useSignin = () => {
   const [isSigning, setIsSigning] = useState(false)
   const [error, setError] = useState(null)
   const URL = `${baseURL}/signin`
+
   const showToast = useShowToast()
   const setAuthToken = useAuthTokenStore(state => state.setAuthToken)
-  const authToken = useAuthTokenStore(state => state.authToken)
+  const setAuthUser = useAuthTokenStore(state => state.setAuthUser)
 
   const signin = (data) => {
     if (isSigning) return
@@ -19,12 +20,12 @@ const useSignin = () => {
     axios
       .post(URL, data)
       .then(res => {
-        console.log(res.data.data)
-        const { token } = res.data.data
+        const { token, user } = res.data
+        const userData = JSON.stringify(user)
         localStorage.setItem('authToken', token)
+        localStorage.setItem('authUser', userData)
         setAuthToken(token)
-        console.log(token)
-        console.log(authToken)
+        setAuthUser(user)
         setError(null)
       })
       .catch(err => {

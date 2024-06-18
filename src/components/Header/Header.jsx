@@ -7,10 +7,13 @@ import { PiNewspaperBold } from 'react-icons/pi'
 import { FaPen } from 'react-icons/fa'
 import { LuPencil } from 'react-icons/lu'
 import useLogout from '../../hooks/useLogout'
+import useAuthTokenStore from '../../store/authTokenStore'
 
 const Header = () => {
   const { isOpen, onOpen, onClose } = useDisclosure()
   const { logout, isLogouting } = useLogout()
+  const authUser = useAuthTokenStore(state => state.authUser)
+  console.log(authUser)
 
   const Links = [
     {
@@ -64,10 +67,16 @@ const Header = () => {
             建立餐廳
             </Box>
           </Button>
-          <HStack spacing={3}>
-            <Avatar name='user' src='/cover.jpg' size={'sm'} />
-            <Text>user1</Text>
-          </HStack>
+          <Link
+            _hover={{ textDecoration: 'none' }}
+            as={RouterLink}
+            to={`/users/${authUser.id}`}
+          >
+            <HStack spacing={3}>
+              <Avatar name='user' src={authUser.avatar} size={'sm'} alt={`${authUser.name} avatar`} />
+              <Text>{authUser.name}</Text>
+            </HStack>
+          </Link>
           <Button
             colorScheme='red'
             variant='outline'
