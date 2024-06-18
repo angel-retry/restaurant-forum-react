@@ -1,6 +1,7 @@
 import { Avatar, Button, FormControl, FormLabel, Heading, HStack, Input, Stack, Textarea, VStack } from '@chakra-ui/react'
 import { useRef, useState } from 'react'
 import useAuthTokenStore from '../../store/authTokenStore'
+import usePostUserProfileAvatar from '../../hooks/usePostUserProfileAvatar'
 
 const EditProfilePage = () => {
   const authUser = useAuthTokenStore(state => state.authUser)
@@ -9,13 +10,19 @@ const EditProfilePage = () => {
     introduction: authUser.introduction || ''
   })
   const fileRef = useRef(null)
+
+  const { isLoading: isAvatarLoading, handleAvatarChange, avatarURL, setAvatarURL } = usePostUserProfileAvatar()
+
   return (
     <Stack maxW={'500px'} marginX={'auto'} w={'100%'} px={3} >
       <VStack spacing={{ base: 5, md: 10 }} my={2} >
         <Heading fontSize={{ base: '2xl', md: '3xl' }}>修改個人資料</Heading>
         <HStack spacing={5}>
-          <Avatar src={authUser.avatar} size={{ base: 'lg', md: 'xl' }} name='user' />
-          <Input type='file' hidden ref={fileRef} />
+          {
+            !isAvatarLoading && (<Avatar src={avatarURL || authUser.avatar } size={{ base: 'lg', md: 'xl' }} name='user' />)
+          }
+
+          <Input type='file' hidden ref={fileRef} onChange={handleAvatarChange} />
           <Button size={{ base: 'sm', md: 'md' }} onClick={() => fileRef.current.click()}>修改個人大頭貼</Button>
         </HStack>
         <FormControl id="name" display={'flex'} alignItems={'center'}>
