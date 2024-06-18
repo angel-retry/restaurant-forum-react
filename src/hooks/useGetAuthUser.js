@@ -3,11 +3,11 @@ import useAuthTokenStore from '../store/authTokenStore'
 import baseURL from '../config/apiConfig'
 import axios from 'axios'
 
-const useGetAuthUser = (userId) => {
+const useGetAuthUser = () => {
   const [isLoading, setIsLoading] = useState(true)
   const { authUser, getAuthUserData, authToken } = useAuthTokenStore()
 
-  const URL = `${baseURL}/auth/${userId}`
+  const URL = `${baseURL}/auth/user`
   useEffect(() => {
     isLoading(true)
     const getAuthUser = () => {

@@ -3,12 +3,18 @@ import { useParams } from 'react-router-dom'
 import ProfileHeader from '../../components/Profile/ProfileHeader'
 import ProfileTab from '../../components/Profile/ProfileTab'
 import ProfilePosts from '../../components/Profile/ProfilePosts'
+import useAuthTokenStore from '../../store/authTokenStore'
+import useGetUserProfile from '../../hooks/useGetUserProfile'
 
 const ProfilePage = () => {
   const { userId } = useParams()
+  const { isLoading, userProfile } = useGetUserProfile(userId)
   return (
     <Stack px={3}>
-      <ProfileHeader />
+      {
+        !isLoading && userProfile && <ProfileHeader />
+      }
+
       <ProfileTab />
       <ProfilePosts />
     </Stack>
