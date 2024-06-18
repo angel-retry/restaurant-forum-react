@@ -1,19 +1,22 @@
 import RestaurantsFeeds from '../../components/Feeds/RestaurantsFeeds'
 import CommentsFeeds from '../../components/Feeds/CommentsFeeds'
-import { Flex, HStack } from '@chakra-ui/react'
+import { Flex, Heading, HStack, Stack } from '@chakra-ui/react'
 import useGetFeedsRestaurants from '../../hooks/useGetFeedsRestaurants'
 
 const FeedsPage = () => {
   const { isLoading, feedsRestaurants } = useGetFeedsRestaurants()
   return (
-    <Flex w={'100%'} flexDir={{ base: 'column', md: 'row' }} px={3} gap={5}>
-      <HStack flex={1} >
-        <RestaurantsFeeds isLoading={isLoading} restaurants={feedsRestaurants} />
-      </HStack>
-      <HStack flex={1} >
-        <CommentsFeeds />
-      </HStack>
-    </Flex>
+    <Stack px={3} spacing={5}>
+      <Heading>最新動態</Heading>
+      <Flex w={'100%'} flexDir={{ base: 'column', md: 'row' }} gap={5} alignItems={'flex-start'}>
+        <HStack flex={1} >
+          <RestaurantsFeeds isLoading={isLoading} restaurants={feedsRestaurants} />
+        </HStack>
+        <HStack flex={1} >
+          <CommentsFeeds />
+        </HStack>
+      </Flex>
+    </Stack>
   )
 }
 

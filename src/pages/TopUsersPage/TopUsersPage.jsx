@@ -12,7 +12,7 @@ const TopUsersPage = () => {
           <Grid templateColumns="repeat(auto-fill, minmax(300px, 1fr))" justifyItems={'center'} gap={10} >
             {
               topUsers.map(user => (
-                <Card key={user.id} maxW={'300px'} w={'100%'} boxShadow={'lg'} >
+                <Card key={user.id} maxW={'300px'} w={'100%'} boxShadow={'lg'} variant={'outline'} >
                   <VStack p={10} spacing={5}>
                     <Avatar src={user.avatar} name='user' size={'lg'} />
                     <Heading fontSize={'2xl'}>{user.name}</Heading>
