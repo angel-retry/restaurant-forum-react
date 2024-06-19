@@ -2,11 +2,13 @@ import { useEffect, useState } from 'react'
 import baseURL from '../config/apiConfig'
 import axios from 'axios'
 import useAuthTokenStore from '../store/authTokenStore'
+import useCategoryStore from '../store/categoryStore'
 
 const useGetCategories = () => {
   const [isLoading, setIsLoading] = useState(true)
   const authToken = useAuthTokenStore(state => state.authToken)
-  const [categories, setCategories] = useState([])
+  const setCategories = useCategoryStore(state => state.setCategories)
+  const categories = useCategoryStore(state => state.categories)
 
   const URL = `${baseURL}/categories`
   useEffect(() => {
@@ -20,6 +22,7 @@ const useGetCategories = () => {
         })
         .then(res => {
           const { data } = res
+          localStorage.setItem('categories', JSON.stringify(data))
           setCategories(data)
         })
         .catch(err => {

@@ -61,12 +61,17 @@ const Header = () => {
           onClick={isOpen ? onClose : onOpen}
         />
         <HStack spacing={5} display={{ base: 'none', md: 'flex' }}>
-          <Button colorScheme='green' variant={'outline'} gap={'3'} _hover={{ bg: 'green', color: 'white' }}>
-            <FaPen size={'16px'} />
-            <Box display={{ md: 'none', lg: 'flex' }}>
-            建立餐廳
-            </Box>
-          </Button>
+          <Link
+            as={RouterLink}
+            to='/restaurants/create'
+          >
+            <Button colorScheme='green' variant={'outline'} gap={'3'} _hover={{ bg: 'green', color: 'white' }}>
+              <FaPen size={'16px'} />
+              <Box display={{ md: 'none', lg: 'flex' }}>
+              建立餐廳
+              </Box>
+            </Button>
+          </Link>
           <Link
             _hover={{ textDecoration: 'none' }}
             as={RouterLink}

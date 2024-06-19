@@ -1,54 +1,95 @@
-import { Box, Button, Center, Flex, FormControl, FormLabel, Heading, Input } from '@chakra-ui/react'
+import { Box, Button, Center, FormControl, FormLabel, Input, FormErrorMessage, VStack, HStack, Select } from '@chakra-ui/react'
 import { FaImage } from 'react-icons/fa'
+import useCategoryStore from '../../store/categoryStore'
 
-const RestaurantForm = ({ restaurantId }) => {
+const RestaurantForm = ({ register, errors }) => {
+  const categories = useCategoryStore(state => state.categories)
+
   return (
     <>
-      <Heading fontSize={{ base: '2xl', md: '3xl' }}>
-       { restaurantId ? '編輯餐廳' : '建立餐廳'}
-      </Heading>
-      <FormControl id="email" display={'flex'} alignItems={'center'}>
-        <FormLabel flex={1} m={0} fontSize={{ base: 'md', md: 'lg' }} >餐廳名字</FormLabel>
-        <Input flex={2} type="text" fontSize={{ base: 'md', md: 'lg' }} />
+      <FormControl id="name" isInvalid={errors.name} display={'flex'} alignItems={'center'}>
+        <HStack w={'100%'}>
+          <FormLabel flex={1} m={0} fontSize={{ base: 'md', md: 'lg' }}>餐廳名字</FormLabel>
+          <VStack flex={2} p={0} spacing={0} w={'100%'} align={'flex-start'}>
+            <Input type="text" fontSize={{ base: 'md', md: 'lg' }} {...register('name')} />
+            <FormErrorMessage>{errors.name && errors.name.message}</FormErrorMessage>
+          </VStack>
+        </HStack>
+      </FormControl>
+
+      <FormControl id="categoryId" display={'flex'} alignItems={'center'} isInvalid={errors.categoryId}>
+        <HStack w={'100%'}>
+          <FormLabel flex={1} m={0} fontSize={{ base: 'md', md: 'lg' }}>餐廳圖片</FormLabel>
+          <VStack flex={2} p={0} spacing={0} w={'100%'} align={'flex-start'}>
+            <Select placeholder='餐廳種類' fontSize={{ base: 'md', md: 'lg' }} {...register('categoryId')} defaultValue="" >
+              {
+                categories.map(category => (
+                  <option key={category.id} value={category.id}>
+                  {category.name}
+                  </option>
+                ))
+              }
+            </Select>
+            <FormErrorMessage>{errors.categoryId && errors.categoryId.message}</FormErrorMessage>
+          </VStack>
+        </HStack>
+      </FormControl>
+
+      <FormControl id="tel" isInvalid={errors.tel} display={'flex'} alignItems={'center'}>
+        <HStack w={'100%'}>
+          <FormLabel flex={1} m={0} fontSize={{ base: 'md', md: 'lg' }}>餐廳電話</FormLabel>
+          <VStack flex={2} p={0} spacing={0} w={'100%'} align={'flex-start'}>
+            <Input type="tel" fontSize={{ base: 'md', md: 'lg' }} {...register('tel')} />
+            <FormErrorMessage>{errors.tel && errors.tel.message}</FormErrorMessage>
+          </VStack>
+        </HStack>
+      </FormControl>
+
+      <FormControl id="address" isInvalid={errors.address} display={'flex'} alignItems={'center'}>
+        <HStack w={'100%'}>
+          <FormLabel flex={1} m={0} fontSize={{ base: 'md', md: 'lg' }}>餐廳地址</FormLabel>
+          <VStack flex={2} p={0} spacing={0} w={'100%'} align={'flex-start'}>
+            <Input type="text" fontSize={{ base: 'md', md: 'lg' }} {...register('address')} />
+            <FormErrorMessage>{errors.address && errors.address.message}</FormErrorMessage>
+          </VStack>
+        </HStack>
+      </FormControl>
+
+      <FormControl id="addressUrl" display={'flex'} alignItems={'center'}>
+        <HStack w={'100%'}>
+          <FormLabel flex={1} m={0} fontSize={{ base: 'md', md: 'lg' }}>Google Map 位置</FormLabel>
+          <VStack flex={2} p={0} spacing={0} w={'100%'} align={'flex-start'}>
+            <Input type="text" fontSize={{ base: 'md', md: 'lg' }} {...register('addressUrl')} />
+          </VStack>
+        </HStack>
+      </FormControl>
+
+      <FormControl id="introduction" isInvalid={errors.introduction} display={'flex'} alignItems={'center'}>
+        <HStack w={'100%'}>
+          <FormLabel flex={1} m={0} fontSize={{ base: 'md', md: 'lg' }}>餐廳介紹</FormLabel>
+          <VStack flex={2} p={0} spacing={0} w={'100%'} align={'flex-start'}>
+            <Input type="text" fontSize={{ base: 'md', md: 'lg' }} {...register('introduction')} />
+            <FormErrorMessage>{errors.introduction && errors.introduction.message}</FormErrorMessage>
+          </VStack>
+        </HStack>
       </FormControl>
 
       <FormControl id="email" display={'flex'} alignItems={'center'}>
-        <FormLabel flex={1} m={0} fontSize={{ base: 'md', md: 'lg' }} >餐廳電話</FormLabel>
-        <Input flex={2} type="tel" fontSize={{ base: 'md', md: 'lg' }} />
+        <HStack w={'100%'}>
+          <FormLabel flex={1} m={0} fontSize={{ base: 'md', md: 'lg' }}>餐廳圖片</FormLabel>
+          <VStack flex={2} p={0} spacing={0} w={'100%'} align={'flex-start'}>
+            <Input type="file" fontSize={{ base: 'md', md: 'lg' }} display={'none'} />
+            <Button w={'100%'} justifySelf={'flex-start'}>上傳圖片</Button>
+          </VStack>
+        </HStack>
       </FormControl>
 
-      <FormControl id="email" display={'flex'} alignItems={'center'}>
-        <FormLabel flex={1} m={0} fontSize={{ base: 'md', md: 'lg' }} >餐廳地址</FormLabel>
-        <Input flex={2} type="text" fontSize={{ base: 'md', md: 'lg' }} />
-      </FormControl>
-
-      <FormControl id="email" display={'flex'} alignItems={'center'}>
-        <FormLabel flex={1} m={0} fontSize={{ base: 'md', md: 'lg' }} >Google Map 位置</FormLabel>
-        <Input flex={2} type="text" fontSize={{ base: 'md', md: 'lg' }} />
-      </FormControl>
-
-      <FormControl id="email" display={'flex'} alignItems={'center'}>
-        <FormLabel flex={1} m={0} fontSize={{ base: 'md', md: 'lg' }} >餐廳介紹</FormLabel>
-        <Input flex={2} type="text" fontSize={{ base: 'md', md: 'lg' }} />
-      </FormControl>
-
-      <FormControl id="email" display={'flex'} alignItems={'center'}>
-        <FormLabel flex={1} m={0} fontSize={{ base: 'md', md: 'lg' }} >餐廳圖片</FormLabel>
-        <Input type="text" fontSize={{ base: 'md', md: 'lg' }} display={'none'} />
-        <Button flex={2} justifySelf={'flex-start'}>上傳圖片</Button>
-      </FormControl>
       <Box w={'100%'} h={'300px'}>
         {/* <Image src='/cover.jpg' w={'100%'} h={'100%'} objectFit={'cover'}></Image> */}
         <Center w={'100%'} h={'100%'} bg={'gray.100'} border={'3px solid'} borderRadius={5} borderColor={'gray.200'}>
           <FaImage fontSize={'50px'} color='gray' />
         </Center>
       </Box>
-      <Flex w={'100%'} display={'flex'} flexDir={{ base: 'column', md: 'row-reverse' }} gap={3}>
-        <Button colorScheme='green' w={{ base: '100%', md: '30%' }}>
-          { restaurantId ? '編輯' : '送出'}
-        </Button>
-        <Button colorScheme='blackAlpha' w={{ base: '100%', md: '30%' }}>Back</Button>
-      </Flex>
     </>
   )
 }
