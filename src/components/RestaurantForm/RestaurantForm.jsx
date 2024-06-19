@@ -1,9 +1,14 @@
-import { Box, Button, Center, FormControl, FormLabel, Input, FormErrorMessage, VStack, HStack, Select } from '@chakra-ui/react'
+import { Box, Button, Center, FormControl, FormLabel, Input, FormErrorMessage, VStack, HStack, Select, Image } from '@chakra-ui/react'
 import { FaImage } from 'react-icons/fa'
 import useCategoryStore from '../../store/categoryStore'
+import { useRef } from 'react'
+import usePostRestaurantImage from '../../hooks/usePostRestaurantImage'
 
 const RestaurantForm = ({ register, errors }) => {
   const categories = useCategoryStore(state => state.categories)
+  const { isLoading, handleImageChange, imageURL } = usePostRestaurantImage()
+
+  const fileRef = useRef(null)
 
   return (
     <>
@@ -78,17 +83,23 @@ const RestaurantForm = ({ register, errors }) => {
         <HStack w={'100%'}>
           <FormLabel flex={1} m={0} fontSize={{ base: 'md', md: 'lg' }}>餐廳圖片</FormLabel>
           <VStack flex={2} p={0} spacing={0} w={'100%'} align={'flex-start'}>
-            <Input type="file" fontSize={{ base: 'md', md: 'lg' }} display={'none'} />
-            <Button w={'100%'} justifySelf={'flex-start'}>上傳圖片</Button>
+            <Input type="file" display={'none'} ref={fileRef} onChange={handleImageChange} />
+            <Button w={'100%'} justifySelf={'flex-start'} onClick={() => fileRef.current.click()} isLoading={isLoading}>上傳圖片</Button>
           </VStack>
         </HStack>
       </FormControl>
 
       <Box w={'100%'} h={'300px'}>
-        {/* <Image src='/cover.jpg' w={'100%'} h={'100%'} objectFit={'cover'}></Image> */}
-        <Center w={'100%'} h={'100%'} bg={'gray.100'} border={'3px solid'} borderRadius={5} borderColor={'gray.200'}>
+        {
+          !isLoading && imageURL
+            ? (<Image src={imageURL} w={'100%'} h={'100%'} objectFit={'cover'} objectPosition={'center'}/>)
+            : (
+            <Center w={'100%'} h={'100%'} bg={'gray.100'} border={'3px solid'} borderRadius={5} borderColor={'gray.200'}>
           <FaImage fontSize={'50px'} color='gray' />
         </Center>
+              )
+        }
+
       </Box>
     </>
   )
