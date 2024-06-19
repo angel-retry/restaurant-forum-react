@@ -33,7 +33,7 @@ const useGetRestaurant = (restaurantId) => {
     }
 
     if (authToken) getRestaurant()
-  }, [authToken, restaurantId])
+  }, [authToken, restaurantId, setRestaurant])
 
   return { isLoading, restaurant }
 }
