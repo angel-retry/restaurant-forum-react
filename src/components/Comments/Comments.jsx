@@ -1,13 +1,13 @@
 import { Heading, Text, Textarea, VStack } from '@chakra-ui/react'
 import Comment from './Comment'
 
-const Comments = () => {
+const Comments = ({ restaurant }) => {
   return (
     <VStack width={'100%'} align={'flex-start'}>
       <Heading>所有評論</Heading>
       {
-        Array.from({ length: 5 }, (_, i) => (
-          <Comment key={i} />
+        restaurant.CommentedUsers.map(comment => (
+          <Comment key={comment.Comment.id} comment={comment} />
         ))
       }
       <Text fontWeight={'bold'}>留下評論:</Text>
