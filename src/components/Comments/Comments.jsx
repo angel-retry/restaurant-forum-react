@@ -1,17 +1,29 @@
-import { Heading, Text, Textarea, VStack } from '@chakra-ui/react'
+import { Button, Heading, Text, Textarea, VStack } from '@chakra-ui/react'
 import Comment from './Comment'
+import { useState } from 'react'
 
 const Comments = ({ restaurant }) => {
+  const [commentValue, setCommentValue] = useState(null)
   return (
     <VStack width={'100%'} align={'flex-start'}>
       <Heading>所有評論</Heading>
       {
+        restaurant.CommentedUsers.length === 0 && (
+          <VStack py={5}>
+            <Text>目前還沒有人評論! 趕快留言吧!</Text>
+          </VStack>
+        )
+      }
+      {
         restaurant.CommentedUsers.map(comment => (
-          <Comment key={comment.Comment.id} comment={comment} />
+          <Comment key={comment.id} comment={comment} />
         ))
       }
-      <Text fontWeight={'bold'}>留下評論:</Text>
-      <Textarea maxW={'800px'} placeholder='你的回覆是發帖的最大動力'></Textarea>
+      <VStack w={'100%'} maxW={'800px'} align={'flex-start'}>
+        <Text fontWeight={'bold'}>留下評論:</Text>
+        <Textarea placeholder='你的回覆是發帖的最大動力' value={commentValue} onChange={(e) => setCommentValue(e.target.value)}></Textarea>
+        <Button colorScheme='green' alignSelf={'flex-end'} size={'lg'}>送出</Button>
+      </VStack>
     </VStack>
   )
 }
