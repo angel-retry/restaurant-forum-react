@@ -7,8 +7,10 @@ import useShowToast from '../hooks/useShowToast'
 
 const usePostComment = (restaurantId) => {
   const [isLoading, setIsLoading] = useState(false)
+  const authToken = useAuthTokenStore(state => state.authToken)
   const authUser = useAuthTokenStore(state => state.authUser)
   const addComment = useRestaurantsStore(state => state.addComment)
+  const restaurant = useRestaurantsStore(state => state.restaurant)
   const showToast = useShowToast()
 
   const URL = `${baseURL}/comments/${restaurantId}`
@@ -19,12 +21,19 @@ const usePostComment = (restaurantId) => {
     axios
       .post(URL, text, {
         headers: {
-          Authorization: `Bearer ${authUser.token}`
+          Authorization: `Bearer ${authToken}`
         }
       })
       .then(res => {
         const { newComment } = res.data
-        addComment(newComment)
+        const commentData = {
+          ...newComment,
+          username: authUser.name,
+          avatar: authUser.avatar
+        }
+        console.log({ newComment })
+        addComment(commentData)
+        console.log({ restaurant })
         showToast('Success', '成功新增評論', 'success')
       })
       .catch(err => console.error(err))

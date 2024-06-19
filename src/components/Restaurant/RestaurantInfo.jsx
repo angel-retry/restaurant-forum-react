@@ -22,7 +22,7 @@ const RestaurantInfo = ({ restaurant }) => {
             </HStack>
             <HStack spacing={2}>
               <FaRegCommentDots size={22} />
-              <Text fontSize={20}>{restaurant.CommentedUsers.length }</Text>
+              <Text fontSize={20}>{restaurant.Comments.length }</Text>
             </HStack>
           </HStack>
           <HStack w={'100%'} fontWeight={'bold'} align={'flex-start'}>

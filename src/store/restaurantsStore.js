@@ -6,8 +6,10 @@ const useRestaurantsStore = create(set => ({
   restaurant: null,
   setRestaurant: restaurant => set({ restaurant }),
   addComment: newComment => set(state => ({
-    ...state.restaurant,
-    CommentedUsers: [...state.restaurant.CommentedUsers, newComment]
+    restaurant: {
+      ...state.restaurant,
+      Comments: [...state.restaurant.Comments, newComment]
+    }
   }))
 }))
 
