@@ -35,7 +35,7 @@ const usePostUserProfileAvatar = () => {
       })
   }
 
-  return { isLoading, handleAvatarChange, avatarURL, setAvatarURL }
+  return { isLoading, handleAvatarChange, avatarURL }
 }
 
 export default usePostUserProfileAvatar

@@ -3,7 +3,8 @@ import { useRef, useState } from 'react'
 import useAuthTokenStore from '../../store/authTokenStore'
 import usePostUserProfileAvatar from '../../hooks/usePostUserProfileAvatar'
 import useShowToast from '../../hooks/useShowToast'
-import userGetUserProfile from '../../hooks/useGetUserProfile'
+import usePutUserProfile from '../../hooks/usePutUserProfile'
+import { useNavigate } from 'react-router-dom'
 
 const EditProfilePage = () => {
   const authUser = useAuthTokenStore(state => state.authUser)
@@ -14,13 +15,30 @@ const EditProfilePage = () => {
   })
   const fileRef = useRef(null)
 
-  const { isLoading: isAvatarLoading, handleAvatarChange, avatarURL, setAvatarURL } = usePostUserProfileAvatar()
-  const showToast = useShowToast()
+  const { isLoading: isAvatarLoading, handleAvatarChange, avatarURL } = usePostUserProfileAvatar()
 
-  const handleEditProfile = () => {
+  const { putAuthUser, isLoading } = usePutUserProfile(authUser.id)
+
+  const showToast = useShowToast()
+  const navigate = useNavigate()
+
+  const handleEditProfile = async () => {
     const { name, introduction } = inputs
     if (!name) {
       return showToast('Error', '請輸入名字!', 'error')
+    }
+    const data = {
+      name,
+      introduction,
+      avatar: avatarURL || authUser.avatar
+    }
+
+    try {
+      await putAuthUser(data)
+      showToast('Success', '修改成功!', 'success')
+      navigate(`/users/${authUser.id}`)
+    } catch (error) {
+      console.error(error)
     }
   }
 
@@ -63,7 +81,7 @@ const EditProfilePage = () => {
 
         <HStack w={'full'}justifyContent={'flex-end'}>
           <Button w={{ base: '20%', md: '30%' }}>Back</Button>
-          <Button w={{ base: '20%', md: '30%' }} colorScheme='blue'>修改</Button>
+          <Button w={{ base: '20%', md: '30%' }} colorScheme='blue' onClick={handleEditProfile} isLoading={isLoading}>修改</Button>
         </HStack>
       </VStack>
     </Stack>

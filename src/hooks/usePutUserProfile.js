@@ -3,10 +3,10 @@ import axios from 'axios'
 import baseURL from '../config/apiConfig'
 import useAuthTokenStore from '../store/authTokenStore'
 
-const usePutAuthUser = (userId) => {
+const usePutUserProfile = (userId) => {
   const authToken = useAuthTokenStore(state => state.authToken)
+  const setAuthUser = useAuthTokenStore(state => state.setAuthUser)
   const [isLoading, setIsLoading] = useState(false)
-  const [updateDone, setUpdateDone] = useState(false)
   if (!userId) return
   const URL = `${baseURL}/users/${userId}`
 
@@ -14,20 +14,24 @@ const usePutAuthUser = (userId) => {
     if (isLoading) return
     setIsLoading(true)
 
+    console.log(data)
+
     axios
-      .post(URL, data, {
+      .put(URL, data, {
         headers: {
           Authorization: `Bearer ${authToken}`
         }
-          .then(res => {
-            const { user } = res.data
-            if (user) setUpdateDone(true)
-          })
-          .catch(err => console.error(err))
-          .finally(() => setIsLoading(false))
       })
+      .then(res => {
+        const { updatedUser } = res.data
+        console.log(updatedUser)
+        localStorage.setItem('authUser', JSON.stringify(updatedUser))
+        setAuthUser(updatedUser)
+      })
+      .catch(err => console.error(err))
+      .finally(() => setIsLoading(false))
   }
-  return { updateDone, putAuthUser, isLoading }
+  return { putAuthUser, isLoading }
 }
 
-export default usePutAuthUser
+export default usePutUserProfile
