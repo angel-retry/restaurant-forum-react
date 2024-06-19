@@ -21,10 +21,10 @@ const Restaurant = ({ restaurant }) => {
             </HStack>
             )}
             {
-              restaurant.CommentedUsers && (
+              restaurant.Comments && (
                 <HStack spacing={2}>
                   <FaRegCommentDots size={22} />
-                  <Text fontSize={20}>{restaurant.CommentedUsers.length}</Text>
+                  <Text fontSize={20}>{restaurant.Comments.length}</Text>
                 </HStack>
               )
             }

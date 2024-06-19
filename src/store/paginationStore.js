@@ -3,7 +3,7 @@ import { create } from 'zustand'
 const usePaginationStore = create(set => ({
   count: null,
   setCount: count => set({ count }),
-  currentPage: 1,
+  currentPage: localStorage.getItem('currentPage'),
   setCurrentPage: currentPage => set({ currentPage })
 }))
 

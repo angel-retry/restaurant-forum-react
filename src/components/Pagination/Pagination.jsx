@@ -8,11 +8,17 @@ const Pagination = ({ count }) => {
   const setCurrentPage = usePaginationStore(state => state.setCurrentPage)
   const pages = Array.from({ length: totalPage }, (_, i) => i + 1)
   const handlePrevPage = () => {
-    setCurrentPage(currentPage > 0 ? currentPage - 1 : 1)
+    const prevPage = currentPage > 0 ? currentPage - 1 : 1
+    setCurrentPage(prevPage)
+    localStorage.setItem('currentPage', prevPage)
   }
   const handleNextPage = () => {
-    setCurrentPage(currentPage < totalPage ? currentPage + 1 : totalPage)
+    const nextPage = currentPage < totalPage ? currentPage + 1 : totalPage
+    setCurrentPage(nextPage)
+    localStorage.setItem('currentPage', nextPage)
   }
+
+  console.log({ currentPage })
 
   return (
     <>
@@ -25,7 +31,10 @@ const Pagination = ({ count }) => {
 
             {
               pages.map(page => (
-                <Button key={page} isActive={page === currentPage} onClick={() => setCurrentPage(page)}>
+                <Button key={page} isActive={page === Number(currentPage)} onClick={() => {
+                  setCurrentPage(page)
+                  localStorage.setItem('currentPage', page)
+                }}>
                   {page}
                 </Button>
               ))

@@ -21,14 +21,17 @@ const useGetRestaurants = () => {
   const setKeyword = useKeywordStore(state => state.setKeyword)
   console.log(currentPage)
   console.log(currentCategory)
-  const searchCurrentPage = `page=${currentPage || null}`
-  const searchCurrentCategory = `categoryId=${currentCategory || null}`
+  const searchCurrentPage = currentPage ? `&page=${currentPage}` : ''
+  const searchCurrentCategory = currentCategory ? `&categoryId=${currentCategory}` : ''
   const searchKeyword = keyword ? `&keyword=${keyword}` : ''
-  const URL = `${baseURL}/restaurants?${searchCurrentPage}&${searchCurrentCategory}${searchKeyword}`
+  const URL = `${baseURL}/restaurants?${searchCurrentPage}${searchCurrentCategory}${searchKeyword}`
   console.log({ URL })
+  console.log({ searchCurrentCategory })
 
   useEffect(() => {
-    setCurrentPage(1)
+    if (currentCategory) {
+      setCurrentPage(1)
+    }
   }, [currentCategory])
 
   useEffect(() => {
