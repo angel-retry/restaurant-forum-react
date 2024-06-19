@@ -2,9 +2,12 @@ import { Avatar, Button, FormControl, FormLabel, Heading, HStack, Input, Stack, 
 import { useRef, useState } from 'react'
 import useAuthTokenStore from '../../store/authTokenStore'
 import usePostUserProfileAvatar from '../../hooks/usePostUserProfileAvatar'
+import useShowToast from '../../hooks/useShowToast'
+import userGetUserProfile from '../../hooks/useGetUserProfile'
 
 const EditProfilePage = () => {
   const authUser = useAuthTokenStore(state => state.authUser)
+
   const [inputs, setInputs] = useState({
     name: authUser.name,
     introduction: authUser.introduction || ''
@@ -12,6 +15,14 @@ const EditProfilePage = () => {
   const fileRef = useRef(null)
 
   const { isLoading: isAvatarLoading, handleAvatarChange, avatarURL, setAvatarURL } = usePostUserProfileAvatar()
+  const showToast = useShowToast()
+
+  const handleEditProfile = () => {
+    const { name, introduction } = inputs
+    if (!name) {
+      return showToast('Error', '請輸入名字!', 'error')
+    }
+  }
 
   return (
     <Stack maxW={'500px'} marginX={'auto'} w={'100%'} px={3} >
