@@ -2,11 +2,9 @@ import { Box, Button, Center, FormControl, FormLabel, Input, FormErrorMessage, V
 import { FaImage } from 'react-icons/fa'
 import useCategoryStore from '../../store/categoryStore'
 import { useRef } from 'react'
-import usePostRestaurantImage from '../../hooks/usePostRestaurantImage'
 
-const RestaurantForm = ({ register, errors }) => {
+const RestaurantForm = ({ register, errors, isLoading, handleImageChange, imageURL }) => {
   const categories = useCategoryStore(state => state.categories)
-  const { isLoading, handleImageChange, imageURL } = usePostRestaurantImage()
 
   const fileRef = useRef(null)
 
