@@ -8,12 +8,13 @@ import { FaPen } from 'react-icons/fa'
 import { LuPencil } from 'react-icons/lu'
 import useLogout from '../../hooks/useLogout'
 import useAuthTokenStore from '../../store/authTokenStore'
+import usePaginationStore from '../../store/paginationStore'
 
 const Header = () => {
   const { isOpen, onOpen, onClose } = useDisclosure()
   const { logout, isLogouting } = useLogout()
   const authUser = useAuthTokenStore(state => state.authUser)
-  console.log(authUser)
+  const setCurrentPage = usePaginationStore(state => state.setCurrentPage)
 
   const Links = [
     {
@@ -49,7 +50,7 @@ const Header = () => {
           <Box fontSize={'lg'} fontWeight={'bold'}>餐廳論壇</Box>
           <HStack as={'nav'} spacing={6} display={{ base: 'none', md: 'flex' }}>
             {Links.map((link) => (
-              <Link as={RouterLink} key={link.id} to={link.to}>{link.label}</Link>
+              <Link as={RouterLink} key={link.id} to={link.to} onClick={() => setCurrentPage(1)}>{link.label}</Link>
             ))}
           </HStack>
         </HStack>
