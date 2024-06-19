@@ -1,7 +1,6 @@
 import * as yup from 'yup'
 import { Button, Flex, Heading, Stack, VStack } from '@chakra-ui/react'
 import RestaurantForm from '../../components/RestaurantForm/RestaurantForm'
-import { useParams } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import useShowToast from '../../hooks/useShowToast'
@@ -15,7 +14,6 @@ const schema = yup.object({
 }).required()
 
 const RestaurantFormPage = () => {
-  const { restaurantId } = useParams()
   const showToast = useShowToast()
 
   const { register, handleSubmit, formState: { errors } } = useForm({
