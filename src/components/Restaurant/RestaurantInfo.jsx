@@ -4,6 +4,7 @@ import { RiMapPin2Fill } from 'react-icons/ri'
 import useSaveRestaurant from '../../hooks/useSaveRestaurant'
 import useLikeRestaurant from '../../hooks/useLikeRestaurant'
 import { GoBookmark, GoBookmarkFill } from 'react-icons/go'
+import { MdOutlineRemoveRedEye } from 'react-icons/md'
 
 const RestaurantInfo = ({ restaurant }) => {
   const { isLoading, postLike, isLiked, likes } = useLikeRestaurant(restaurant)
@@ -35,9 +36,15 @@ const RestaurantInfo = ({ restaurant }) => {
               </Button>
               <Text fontSize={20}>{likes}</Text>
             </HStack>
+
             <HStack spacing={2}>
               <FaRegCommentDots size={22} />
               <Text fontSize={20}>{restaurant.Comments.length }</Text>
+            </HStack>
+
+            <HStack spacing={2}>
+              <MdOutlineRemoveRedEye size={22} />
+              <Text fontSize={20}>{restaurant.viewCounts }</Text>
             </HStack>
           </HStack>
           <HStack w={'100%'} fontWeight={'bold'} align={'flex-start'}>
