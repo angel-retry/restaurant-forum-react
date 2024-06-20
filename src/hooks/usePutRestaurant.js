@@ -13,7 +13,7 @@ const usePutRestaurant = (restaurantId) => {
 
   const URL = `${baseURL}/restaurants/${restaurantId}`
 
-  const postRestaurant = (data) => {
+  const putRestaurant = (data) => {
     if (isLoading) return
     if (!data) return
     setIsLoading(true)
@@ -27,7 +27,7 @@ const usePutRestaurant = (restaurantId) => {
         const { updatedRestaurant } = res.data
         if (updatedRestaurant) {
           showToast('Success', '餐廳更新成功!', 'success')
-          navigate(`restaurants/${restaurantId}`)
+          navigate(`/restaurants/${restaurantId}`)
         }
       })
       .catch(err => {
@@ -37,7 +37,7 @@ const usePutRestaurant = (restaurantId) => {
         setIsLoading(false)
       })
   }
-  return { isLoading, postRestaurant }
+  return { isLoading, putRestaurant }
 }
 
 export default usePutRestaurant

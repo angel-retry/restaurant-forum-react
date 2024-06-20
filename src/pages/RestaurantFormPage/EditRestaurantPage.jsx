@@ -8,6 +8,7 @@ import usePostRestaurantImage from '../../hooks/usePostRestaurantImage'
 import useAuthTokenStore from '../../store/authTokenStore'
 import { useParams } from 'react-router-dom'
 import useGetRestaurant from '../../hooks/useGetRestaurant'
+import usePutRestaurant from '../../hooks/usePutRestaurant'
 
 const schema = yup.object({
   name: yup.string().required('請填入餐廳名字'),
@@ -31,6 +32,8 @@ const EditRestaurantPage = () => {
 
   const { isLoading: isLoadingRestaurant, restaurant } = useGetRestaurant(restaurantId)
 
+  const { isLoading: isUpdating, putRestaurant } = usePutRestaurant(restaurantId)
+
   const onSubmit = async (data) => {
     const restaurantData = {
       ...data,
@@ -38,7 +41,7 @@ const EditRestaurantPage = () => {
       image: imageURL || restaurant.image
     }
     try {
-      console.log(restaurantData)
+      await putRestaurant(restaurantData)
     } catch (error) {
       showToast('Error', error.message, 'error')
     }
@@ -64,7 +67,7 @@ const EditRestaurantPage = () => {
           }
 
           <Flex w={'100%'} display={'flex'} flexDir={{ base: 'column', md: 'row-reverse' }} gap={3}>
-            <Button type="submit" colorScheme='green' w={{ base: '100%', md: '30%' }}>
+            <Button type="submit" colorScheme='green' w={{ base: '100%', md: '30%' }} isLoading={isUpdating}>
               送出
             </Button>
             <Button colorScheme='blackAlpha' w={{ base: '100%', md: '30%' }}>Back</Button>

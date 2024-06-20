@@ -1,4 +1,4 @@
-import { Navigate, Route, Routes } from 'react-router-dom'
+import { Navigate, Route, Routes, useLocation } from 'react-router-dom'
 import './App.css'
 import AuthPage from './pages/AuthPage/AuthPage'
 import PageLayout from './components/Laytout/PageLayout'
@@ -12,9 +12,15 @@ import CreateRestaurantPage from './pages/RestaurantFormPage/CreateRestaurantPag
 import RestaurantPage from './pages/RestaurantPage/RestaurantPage'
 import useAuthTokenStore from './store/authTokenStore'
 import EditRestaurantPage from './pages/RestaurantFormPage/EditRestaurantPage'
+import { useEffect } from 'react'
 
 function App () {
   const authToken = useAuthTokenStore(state => state.authToken)
+  const { pathname } = useLocation()
+
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [pathname])
 
   return (
     <PageLayout>
