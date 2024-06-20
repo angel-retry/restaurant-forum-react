@@ -2,10 +2,10 @@ import { Box, Card, CardBody, Flex, Heading, HStack, Image, Tag, Text, VStack, L
 import { FaHeart, FaRegCommentDots, FaRegHeart } from 'react-icons/fa'
 import { GoBookmark } from 'react-icons/go'
 import { Link as RouterLink } from 'react-router-dom'
-import usePostLikeRestaurant from '../../hooks/usePostLikeRestaurant'
+import useLikeRestaurant from '../../hooks/useLikeRestaurant'
 
 const Restaurant = ({ restaurant }) => {
-  const { isLoading, postLike, isLiked, likes } = usePostLikeRestaurant(restaurant)
+  const { isLoading, postLike, isLiked, likes } = useLikeRestaurant(restaurant)
 
   return (
     <Card borderRadius='lg' variant='outline'>
