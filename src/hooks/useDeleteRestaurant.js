@@ -3,6 +3,7 @@ import { useState } from 'react'
 import useAuthTokenStore from '../store/authTokenStore'
 import useShowToast from './useShowToast'
 import { useNavigate } from 'react-router-dom'
+import baseURL from '../config/apiConfig'
 
 const useDeleteRestaurant = (restaurantId) => {
   const [isDeleting, setIsDeleting] = useState(false)
@@ -10,8 +11,8 @@ const useDeleteRestaurant = (restaurantId) => {
   const showToast = useShowToast()
   const navigate = useNavigate()
 
-  const URL = `/restaurants/${restaurantId}`
-  const deleleRestaurant = () => {
+  const URL = `${baseURL}/restaurants/${restaurantId}`
+  const deleteRestaurant = () => {
     if (isDeleting) return
     if (!authToken) return
     setIsDeleting(true)
@@ -36,7 +37,7 @@ const useDeleteRestaurant = (restaurantId) => {
       })
   }
 
-  return { isDeleting, deleleRestaurant }
+  return { isDeleting, deleteRestaurant }
 }
 
 export default useDeleteRestaurant

@@ -3,10 +3,28 @@ import useAuthTokenStore from '../../store/authTokenStore'
 import { timeAgo } from '../../utils/timeAgo'
 import { Link as RouterLink } from 'react-router-dom'
 import { FaTrashAlt } from 'react-icons/fa'
+import useDeleteRestaurant from '../../hooks/useDeleteRestaurant'
+import useShowToast from '../../hooks/useShowToast'
 
 const RestaurantHeader = ({ restaurant }) => {
   const authUser = useAuthTokenStore(state => state.authUser)
   const isAuthUser = authUser.id === restaurant.CreatedBy.id
+  const { isDeleting, deleteRestaurant } = useDeleteRestaurant(restaurant.id)
+  const showToast = useShowToast()
+
+  const handleDeleting = async () => {
+    if (!isAuthUser) {
+      showToast('Error', '沒有權限刪除該餐廳', 'error')
+      return
+    }
+    if (!window.confirm('請問真的要刪除該餐廳嗎?')) return
+    try {
+      await deleteRestaurant()
+    } catch (error) {
+      console.error(error)
+    }
+  }
+
   return (
     <HStack spacing={5} borderBottom={'1px solid'} borderColor={'gray.300'} width={'100%'} pb={5}>
       <Avatar src='/cover.jpg' size={'lg'} />
@@ -30,7 +48,7 @@ const RestaurantHeader = ({ restaurant }) => {
           {
             isAuthUser && (
               <Tooltip label='刪除餐廳'>
-                <Button colorScheme='red' size={{ base: 'sm', md: 'md' }}>
+                <Button colorScheme='red' size={{ base: 'sm', md: 'md' }} onClick={handleDeleting} isLoading={isDeleting}>
                   <FaTrashAlt />
                 </Button>
               </Tooltip>
