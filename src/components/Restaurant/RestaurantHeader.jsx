@@ -1,7 +1,8 @@
-import { Avatar, Button, HStack, Text, VStack, Link } from '@chakra-ui/react'
+import { Avatar, Button, HStack, Text, VStack, Link, Tooltip } from '@chakra-ui/react'
 import useAuthTokenStore from '../../store/authTokenStore'
 import { timeAgo } from '../../utils/timeAgo'
 import { Link as RouterLink } from 'react-router-dom'
+import { FaTrashAlt } from 'react-icons/fa'
 
 const RestaurantHeader = ({ restaurant }) => {
   const authUser = useAuthTokenStore(state => state.authUser)
@@ -19,11 +20,21 @@ const RestaurantHeader = ({ restaurant }) => {
                   as={RouterLink}
                   to={`/restaurants/${restaurant.id}/edit`}
                 >
-                  <Button colorScheme='green'>編輯餐廳</Button>
+                  <Button colorScheme='green' size={{ base: 'sm', md: 'md' }}>編輯餐廳</Button>
                 </Link>
                 )
               : (<Button colorScheme='blue'> follow</Button>)
 
+          }
+
+          {
+            isAuthUser && (
+              <Tooltip label='刪除餐廳'>
+                <Button colorScheme='red' size={{ base: 'sm', md: 'md' }}>
+                  <FaTrashAlt />
+                </Button>
+              </Tooltip>
+            )
           }
         </HStack>
         <Text color={'gray.500'}>分享於 {timeAgo(restaurant.createdAt)}</Text>
