@@ -1,9 +1,8 @@
-import { Button, Grid, GridItem, Heading, VStack, Link } from '@chakra-ui/react'
+import { Button, Grid, GridItem, Heading, VStack } from '@chakra-ui/react'
 import Restaurant from './Restaurant'
 import { FaRegFileExcel } from 'react-icons/fa'
 import useCategoryStore from '../../store/categoryStore'
 import useSearchKeyword from '../../store/searchKeyword'
-import { Link as RouterLink } from 'react-router-dom'
 
 const Restaurants = ({ restaurants }) => {
   const restaurantsData = restaurants
@@ -25,12 +24,7 @@ const Restaurants = ({ restaurants }) => {
             {
                restaurantsData.map(restaurant => (
                 <GridItem w='100%' key={restaurant.id} >
-                  <Link
-                  as={RouterLink}
-                  to={`/restaurants/${restaurant.id}`}
-                  >
-                    <Restaurant restaurant={restaurant}/>
-                  </Link>
+                  <Restaurant restaurant={restaurant}/>
                 </GridItem>
 
                ))
