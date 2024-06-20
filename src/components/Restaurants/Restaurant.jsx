@@ -1,11 +1,14 @@
 import { Box, Card, CardBody, Flex, Heading, HStack, Image, Tag, Text, VStack, Link, Button } from '@chakra-ui/react'
 import { FaHeart, FaRegCommentDots, FaRegHeart } from 'react-icons/fa'
-import { GoBookmark } from 'react-icons/go'
+import { GoBookmark, GoBookmarkFill } from 'react-icons/go'
 import { Link as RouterLink } from 'react-router-dom'
 import useLikeRestaurant from '../../hooks/useLikeRestaurant'
+import useSaveRestaurant from '../../hooks/useSaveRestaurant'
 
 const Restaurant = ({ restaurant }) => {
   const { isLoading, postLike, isLiked, likes } = useLikeRestaurant(restaurant)
+
+  const { isLoading: isSaving, postSave, isSaved } = useSaveRestaurant(restaurant)
 
   return (
     <Card borderRadius='lg' variant='outline'>
@@ -39,7 +42,11 @@ const Restaurant = ({ restaurant }) => {
               )
             }
             <HStack marginLeft={'auto'} >
-              <GoBookmark size={24} />
+              <Button variant={'ghost'} _hover={{ bg: 'transparant' }} p={0} onClick={postSave} isLoading={isSaving}>
+                {
+                  isSaved ? <GoBookmarkFill size={24} /> : <GoBookmark size={24} />
+                }
+              </Button>
             </HStack>
           </Flex>
           <Link as={RouterLink} to={`/restaurants/${restaurant.id}`} _hover={{ textDecoration: 'none' }}>
