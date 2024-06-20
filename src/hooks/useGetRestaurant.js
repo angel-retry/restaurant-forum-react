@@ -12,6 +12,7 @@ const useGetRestaurant = (restaurantId) => {
   const authToken = useAuthTokenStore(state => state.authToken)
 
   useEffect(() => {
+    if (!restaurantId) return
     setIsLoading(true)
     const getRestaurant = () => {
       axios
@@ -34,6 +35,8 @@ const useGetRestaurant = (restaurantId) => {
 
     if (authToken) getRestaurant()
   }, [authToken, restaurantId, setRestaurant])
+
+  console.log({ restaurant })
 
   return { isLoading, restaurant }
 }

@@ -5,9 +5,9 @@ import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import useShowToast from '../../hooks/useShowToast'
 import usePostRestaurantImage from '../../hooks/usePostRestaurantImage'
-import usePostRestaurant from '../../hooks/usePostRestaurant'
 import useAuthTokenStore from '../../store/authTokenStore'
 import { useParams } from 'react-router-dom'
+import useGetRestaurant from '../../hooks/useGetRestaurant'
 
 const schema = yup.object({
   name: yup.string().required('請填入餐廳名字'),
@@ -17,11 +17,10 @@ const schema = yup.object({
   categoryId: yup.string().required('請選擇餐廳種類')
 }).required()
 
-const CreateRestaurantPage = () => {
+const EditRestaurantPage = () => {
   const showToast = useShowToast()
   const authUser = useAuthTokenStore(state => state.authUser)
   const { restaurantId } = useParams()
-  console.log(restaurantId)
 
   const { register, handleSubmit, formState: { errors } } = useForm({
     reValidateMode: 'onChange',
@@ -30,16 +29,16 @@ const CreateRestaurantPage = () => {
 
   const { isLoading: isPostingImage, handleImageChange, imageURL } = usePostRestaurantImage()
 
-  const { isLoading: isPosting, postRestaurant } = usePostRestaurant()
+  const { isLoading: isLoadingRestaurant, restaurant } = useGetRestaurant(restaurantId)
 
   const onSubmit = async (data) => {
     const restaurantData = {
       ...data,
       createdBy: authUser.id,
-      image: imageURL
+      image: imageURL || restaurant.image
     }
     try {
-      await postRestaurant(restaurantData)
+      console.log(restaurantData)
     } catch (error) {
       showToast('Error', error.message, 'error')
     }
@@ -58,10 +57,14 @@ const CreateRestaurantPage = () => {
             建立餐廳
           </Heading>
 
-          <RestaurantForm register={register} errors={errors} isPostingImage={isPostingImage} handleImageChange={handleImageChange} imageURL={imageURL}/>
+          {
+            !isLoadingRestaurant && (
+              <RestaurantForm register={register} errors={errors} isPostingImage={isPostingImage} handleImageChange={handleImageChange} imageURL={imageURL} restaurant={restaurant}/>
+            )
+          }
 
           <Flex w={'100%'} display={'flex'} flexDir={{ base: 'column', md: 'row-reverse' }} gap={3}>
-            <Button type="submit" colorScheme='green' w={{ base: '100%', md: '30%' }} isLoading={isPosting}>
+            <Button type="submit" colorScheme='green' w={{ base: '100%', md: '30%' }}>
               送出
             </Button>
             <Button colorScheme='blackAlpha' w={{ base: '100%', md: '30%' }}>Back</Button>
@@ -72,4 +75,4 @@ const CreateRestaurantPage = () => {
   )
 }
 
-export default CreateRestaurantPage
+export default EditRestaurantPage
