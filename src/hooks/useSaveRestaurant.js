@@ -8,6 +8,7 @@ const useSaveRestaurant = (restaurant) => {
   const [isLoading, setIsLoading] = useState(false)
   const authUser = useAuthTokenStore(state => state.authUser)
   const [isSaved, setIsSaved] = useState(restaurant.SavedUsers.includes(authUser.id))
+  const [saves, setSaves] = useState(restaurant.SavedUsers.length)
   const authToken = useAuthTokenStore(state => state.authToken)
   const showToast = useShowToast()
 
@@ -33,6 +34,7 @@ const useSaveRestaurant = (restaurant) => {
 
           if (addSaved) {
             setIsSaved(true)
+            setSaves(saves + 1)
           }
         })
         .catch(err => {
@@ -52,6 +54,7 @@ const useSaveRestaurant = (restaurant) => {
           const { deleteSaved } = res.data
           if (deleteSaved) {
             setIsSaved(false)
+            setSaves(saves - 1)
           }
         })
         .catch(err => {
@@ -63,7 +66,7 @@ const useSaveRestaurant = (restaurant) => {
     }
   }
 
-  return { isLoading, postSave, isSaved }
+  return { isLoading, postSave, isSaved, saves }
 }
 
 export default useSaveRestaurant

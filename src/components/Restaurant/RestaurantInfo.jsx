@@ -1,5 +1,5 @@
 import { Box, Button, Flex, Heading, HStack, Image, Tag, Text, VStack, Wrap } from '@chakra-ui/react'
-import { FaHeart, FaRegBookmark, FaRegCommentDots, FaRegHeart } from 'react-icons/fa'
+import { FaHeart, FaRegCommentDots, FaRegHeart } from 'react-icons/fa'
 import { RiMapPin2Fill } from 'react-icons/ri'
 import useSaveRestaurant from '../../hooks/useSaveRestaurant'
 import useLikeRestaurant from '../../hooks/useLikeRestaurant'
