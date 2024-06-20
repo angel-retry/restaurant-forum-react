@@ -36,8 +36,6 @@ const useGetRestaurant = (restaurantId) => {
     if (authToken) getRestaurant()
   }, [authToken, restaurantId, setRestaurant])
 
-  console.log({ restaurant })
-
   return { isLoading, restaurant }
 }
 

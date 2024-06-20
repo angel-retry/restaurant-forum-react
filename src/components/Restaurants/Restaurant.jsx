@@ -1,10 +1,11 @@
-import { Box, Card, CardBody, Flex, Heading, HStack, Image, Tag, Text, VStack, Link } from '@chakra-ui/react'
-import { FaRegCommentDots, FaRegHeart } from 'react-icons/fa'
+import { Box, Card, CardBody, Flex, Heading, HStack, Image, Tag, Text, VStack, Link, Button } from '@chakra-ui/react'
+import { FaHeart, FaRegCommentDots, FaRegHeart } from 'react-icons/fa'
 import { GoBookmark } from 'react-icons/go'
 import { Link as RouterLink } from 'react-router-dom'
+import usePostLikeRestaurant from '../../hooks/usePostLikeRestaurant'
 
 const Restaurant = ({ restaurant }) => {
-  console.log({ restaurant })
+  const { isLoading, postLike, isLiked, likes } = usePostLikeRestaurant(restaurant)
 
   return (
     <Card borderRadius='lg' variant='outline'>
@@ -20,9 +21,13 @@ const Restaurant = ({ restaurant }) => {
         <VStack align={'flex-start'}>
           <Flex gap={3} w={'full'} >
             {restaurant.LikedUsers && (
-              <HStack spacing={2}>
-              <FaRegHeart size={22} />
-              <Text fontSize={20}>{restaurant.LikedUsers.length}</Text>
+              <HStack spacing={0}>
+                <Button variant={'ghost'} _hover={{ bg: 'transparant' }} p={0} onClick={postLike} isLoading={isLoading}>
+                {
+                  isLiked ? <FaHeart size={22} color='red' /> : <FaRegHeart size={22} />
+                }
+              </Button>
+              <Text fontSize={20}>{likes}</Text>
             </HStack>
             )}
             {
