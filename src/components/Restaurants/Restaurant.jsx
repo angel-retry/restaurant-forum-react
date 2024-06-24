@@ -58,7 +58,6 @@ const Restaurant = ({ restaurant }) => {
         </Text>
       </VStack>
       </CardBody>
-
     </Card>
   )
 }

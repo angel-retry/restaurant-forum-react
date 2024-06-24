@@ -23,7 +23,7 @@ const Pagination = ({ count }) => {
       {
         count !== 0 && (
           <HStack justify={'center'} >
-            <Button isDisabled={currentPage === 1} onClick={handlePrevPage}>
+            <Button isDisabled={Number(currentPage) === 1} onClick={handlePrevPage}>
               <ArrowLeftIcon boxSize={3} />
             </Button>
 
@@ -38,7 +38,7 @@ const Pagination = ({ count }) => {
               ))
             }
 
-            <Button isDisabled={currentPage === totalPage} onClick={handleNextPage} >
+            <Button isDisabled={Number(currentPage) === totalPage} onClick={handleNextPage} >
               <ArrowRightIcon boxSize={3} />
             </Button>
           </HStack>

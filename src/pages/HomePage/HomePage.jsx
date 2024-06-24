@@ -18,7 +18,7 @@ const HomePage = () => {
 
       {!isLoading && (
         <>
-          <Pagination count={count} />
+          <Pagination count={count}/>
         </>
       )}
 

@@ -30,7 +30,7 @@ const useGetRestaurants = () => {
 
   useEffect(() => {
     const getRestaurants = () => {
-      setRestaurants([])
+      setRestaurants(null)
       setIsLoading(true)
       axios
         .get(URL, {
