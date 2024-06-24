@@ -16,6 +16,7 @@ import { useEffect } from 'react'
 
 function App () {
   const authToken = useAuthTokenStore(state => state.authToken)
+  const authUser = useAuthTokenStore(state => state.authUser)
   const { pathname } = useLocation()
 
   useEffect(() => {
@@ -26,7 +27,7 @@ function App () {
     <PageLayout>
       <Routes>
         {
-          authToken
+          authToken && authUser
             ? (
             <>
             <Route path='/restaurants' element={<HomePage />} />
