@@ -7,7 +7,7 @@ import useSaveRestaurant from '../../hooks/useSaveRestaurant'
 import { Link as RouterLink } from 'react-router-dom'
 
 const TopRestaurant = ({ restaurant, index }) => {
-  const { isLoading, postLike, isLiked, likes } = useLikeRestaurant(restaurant)
+  const { isLoading: isLiking, postLike, isLiked, likes } = useLikeRestaurant(restaurant)
 
   const { isLoading: isSaving, postSave, isSaved, saves } = useSaveRestaurant(restaurant)
 
@@ -36,7 +36,7 @@ const TopRestaurant = ({ restaurant, index }) => {
 
             <HStack >
               <HStack spacing={0}>
-                <Button variant={'ghost'} _hover={{ bg: 'transparant' }} p={0} onClick={postLike} isLoading={isLoading}>
+                <Button variant={'ghost'} _hover={{ bg: 'transparant' }} p={0} onClick={postLike} isLoading={isLiking}>
                 {
                   isLiked ? <FaHeart size={22} color='red' /> : <FaRegHeart size={22} />
                 }
@@ -68,6 +68,7 @@ const TopRestaurant = ({ restaurant, index }) => {
         </CardBody>
       </Card>
     </VStack>
+
   )
 }
 
