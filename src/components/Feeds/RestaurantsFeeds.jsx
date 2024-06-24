@@ -1,6 +1,7 @@
 import { ArrowRightIcon } from '@chakra-ui/icons'
 import { Avatar, Box, Card, CardBody, CardHeader, Flex, Heading, HStack, Image, Link, Stack, StackDivider, Tag, Text, VStack } from '@chakra-ui/react'
 import { timeAgo } from '../../utils/timeAgo'
+import { Link as RouterLink } from 'react-router-dom'
 
 const RestaurantsFeeds = ({ isLoading, restaurants }) => {
   return (
@@ -46,6 +47,8 @@ const RestaurantsFeeds = ({ isLoading, restaurants }) => {
                         color='blue.500'
                         fontWeight={'bold'}
                         _hover={{ textDecoration: 'none' }}
+                        to={`/restaurants/${restaurant.id}`}
+                        as={RouterLink}
                       >
                         查看此餐廳詳細資料
                         <ArrowRightIcon boxSize={3} />
