@@ -47,10 +47,10 @@ const Header = () => {
     <Box bg={'gray.100'} px={4} position={'fixed'} zIndex={2} w={'full'}>
       <Flex h={16} alignItems={'center'} justifyContent={'space-between'}>
         <HStack spacing={8} alignItems={'center'}>
-          <Box fontSize={'lg'} fontWeight={'bold'}>餐廳論壇</Box>
+          <Link as={RouterLink} to={'/restaurants'} fontSize={'lg'} fontWeight={'bold'} _hover={{ textDecoration: 'none' }}>餐廳論壇</Link>
           <HStack as={'nav'} spacing={6} display={{ base: 'none', md: 'flex' }}>
             {Links.map((link) => (
-              <Link as={RouterLink} key={link.id} to={link.to} onClick={() => setCurrentPage(1)}>{link.label}</Link>
+              <Link as={RouterLink} key={link.id} to={link.to} onClick={() => setCurrentPage(1)} _hover={{ textDecoration: 'none', color: 'black' }} color={'gray.500'}>{link.label}</Link>
             ))}
           </HStack>
         </HStack>

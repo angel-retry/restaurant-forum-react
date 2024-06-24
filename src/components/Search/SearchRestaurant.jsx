@@ -16,7 +16,7 @@ const SearchRestaurant = () => {
   return (
   <form action="" style={{ width: '100%' }} onSubmit={handleSubmit}>
     <HStack justify={'center'} >
-    <Input placeholder='medium size' size='md' maxW={'600px'} ref={searchRef} />
+    <Input placeholder='餐廳店名、餐廳簡介、地點...' size='md' maxW={'600px'} ref={searchRef} />
     <Button size={'md'} colorScheme='blue' type='submit'>Search</Button>
     </HStack>
   </form>
