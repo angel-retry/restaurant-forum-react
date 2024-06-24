@@ -42,7 +42,7 @@ const useFollowUser = (user) => {
         })
     } else {
       axios
-        .post(URL, {
+        .post(URL, null, {
           headers: {
             Authorization: `Bearer ${authToken}`
           }
