@@ -14,9 +14,10 @@ const HomePage = () => {
 
       <CategoryTab />
 
+      <Restaurants restaurants={restaurants} isLoading={isLoading} />
+
       {!isLoading && (
         <>
-          <Restaurants restaurants={restaurants} />
           <Pagination count={count} />
         </>
       )}

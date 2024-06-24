@@ -1,4 +1,4 @@
-import { Button, HStack, Select, Skeleton, Spinner } from '@chakra-ui/react'
+import { Button, HStack, Select, Skeleton } from '@chakra-ui/react'
 import useCategoryStore from '../../store/categoryStore'
 import useSearchKeyword from '../../store/searchKeyword'
 import useGetCategories from '../../hooks/useGetCategories'

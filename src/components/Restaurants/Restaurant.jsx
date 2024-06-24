@@ -15,9 +15,9 @@ const Restaurant = ({ restaurant }) => {
       <Link as={RouterLink} to={`/restaurants/${restaurant.id}`}>
         <Box w={'full'} height={'250px'}>
           <Image objectFit={'cover'} w={'full'} h={'full'}
-        src={restaurant?.image}
-        alt='Green double couch with wooden legs'
-        />
+          src={restaurant?.image}
+          alt='Green double couch with wooden legs'
+          />
         </Box>
       </Link>
       <CardBody p={{ base: 2, md: 3 }}>
