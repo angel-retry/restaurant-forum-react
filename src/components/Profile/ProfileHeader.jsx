@@ -2,12 +2,14 @@ import { Avatar, Button, Flex, Heading, Stack, Text, VStack, HStack, Link } from
 import { Link as RouterLink, useParams } from 'react-router-dom'
 import useAuthTokenStore from '../../store/authTokenStore'
 import useUserProfileStore from '../../store/userProfileStore'
+import useFollowUser from '../../hooks/useFollowUser'
 
 const ProfileHeader = () => {
   const userId = Number(useParams().userId)
   const authUser = useAuthTokenStore(state => state.authUser)
   const isAuthUser = userId === authUser.id
   const { userProfile } = useUserProfileStore()
+  const { followersCount, isFollowed, handleFollowUser, isLoading } = useFollowUser(userProfile)
 
   return (
     <Stack>
@@ -23,12 +25,16 @@ const ProfileHeader = () => {
                 </Link>
                 )
               : (
-              <Button colorScheme='blue'>Follow</Button>
+              <Button colorScheme='blue' isLoading={isLoading} onClick={handleFollowUser}>
+                {
+                  isFollowed ? '取消追蹤' : '追蹤'
+                }
+              </Button>
                 )
           }
           <HStack spacing={5}>
             <Text>{userProfile.CreatedRestaurants.length} 篇貼文</Text>
-            <Text>{userProfile.Followers.length} 位粉絲</Text>
+            <Text>{followersCount} 位粉絲</Text>
             <Text>{userProfile.Followings.length} 位追蹤中</Text>
           </HStack>
           <Text>
