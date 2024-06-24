@@ -12,8 +12,6 @@ const useLikeRestaurant = (restaurant) => {
   const authToken = useAuthTokenStore(state => state.authToken)
   const showToast = useShowToast()
 
-  console.log({ restaurant })
-
   const URL = `${baseURL}/like/${restaurant.id}`
 
   const postLike = () => {

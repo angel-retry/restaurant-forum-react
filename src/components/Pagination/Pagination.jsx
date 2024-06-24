@@ -18,8 +18,6 @@ const Pagination = ({ count }) => {
     localStorage.setItem('currentPage', nextPage)
   }
 
-  console.log({ currentPage })
-
   return (
     <>
       {

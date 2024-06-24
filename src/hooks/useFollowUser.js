@@ -4,12 +4,10 @@ import baseURL from '../config/apiConfig'
 import axios from 'axios'
 
 const useFollowUser = (user) => {
-  console.log({ user })
-  const followerUserId = user.Followers.map(u => u.id)
   const [isLoading, setIsLoading] = useState(false)
   const authUser = useAuthTokenStore(state => state.authUser)
   const [followersCount, setFollowersCount] = useState(user.Followers.length)
-  const [isFollowed, setIsFollowed] = useState(followerUserId.includes(authUser.id))
+  const [isFollowed, setIsFollowed] = useState(user.Followers.includes(authUser.id))
 
   const authToken = useAuthTokenStore(state => state.authToken)
 

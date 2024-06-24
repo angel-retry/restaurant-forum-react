@@ -10,8 +10,6 @@ const HomePage = () => {
   const { isLoading, restaurants, count } = useGetRestaurants()
   const { categories, isLoading: isCategoryLoading } = useGetCategories()
 
-  console.log({ count })
-
   return (
     <Stack px={3} spacing={5}>
       <SearchRestaurant />

@@ -10,7 +10,6 @@ import useKeywordStore from '../store/searchKeyword'
 const useGetRestaurants = () => {
   const [isLoading, setIsLoading] = useState(true)
   const authToken = useAuthTokenStore(state => state.authToken)
-  console.log(authToken)
   const { restaurants, setRestaurants } = useRestaurantsStore()
   const count = usePaginationStore(state => state.count)
   const setCount = usePaginationStore(state => state.setCount)
@@ -18,21 +17,16 @@ const useGetRestaurants = () => {
   const currentCategory = useCategoryStore(state => state.currentCategory)
   const setCurrentPage = usePaginationStore(state => state.setCurrentPage)
   const keyword = useKeywordStore(state => state.keyword)
-  const setKeyword = useKeywordStore(state => state.setKeyword)
-  console.log(currentPage)
-  console.log(currentCategory)
   const searchCurrentPage = currentPage ? `&page=${currentPage}` : ''
   const searchCurrentCategory = currentCategory ? `&categoryId=${currentCategory}` : ''
   const searchKeyword = keyword ? `&keyword=${keyword}` : ''
   const URL = `${baseURL}/restaurants?${searchCurrentPage}${searchCurrentCategory}${searchKeyword}`
-  console.log({ URL })
-  console.log({ searchCurrentCategory })
 
   useEffect(() => {
     if (currentCategory) {
       setCurrentPage(1)
     }
-  }, [currentCategory])
+  }, [currentCategory, setCurrentPage])
 
   useEffect(() => {
     const getRestaurants = () => {
@@ -46,9 +40,10 @@ const useGetRestaurants = () => {
         })
         .then(res => {
           const { data } = res
-          console.log(data)
           setRestaurants(data.restaurants)
-          setCount(data.count)
+          if (count !== data.count) {
+            setCount(data.count)
+          }
           setIsLoading(false)
         })
         .catch(err => {
@@ -60,7 +55,7 @@ const useGetRestaurants = () => {
     }
 
     if (authToken) getRestaurants()
-  }, [authToken, setRestaurants, setCount, currentPage, setCurrentPage, currentCategory, keyword, setKeyword])
+  }, [authToken, setCount, currentPage, currentCategory, keyword])
 
   return { isLoading, restaurants, count }
 }
