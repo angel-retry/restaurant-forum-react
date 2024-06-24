@@ -7,6 +7,7 @@ const ProfileHeader = ({ userProfile }) => {
   const userId = Number(useParams().userId)
   const authUser = useAuthTokenStore(state => state.authUser)
   const isAuthUser = userId === authUser.id
+
   const { followersCount, isFollowed, handleFollowUser, isLoading: isFollowing } = useFollowUser(userProfile)
 
   return (

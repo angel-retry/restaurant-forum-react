@@ -7,7 +7,7 @@ const TopUsersPage = () => {
 
   return (
     <Stack maxW={1440} mx={'auto'} w={'100%'} px={3}>
-      <Heading>Top Users</Heading>
+      <Heading mb={5}>Top Users</Heading>
       {
         isLoading
           ? (

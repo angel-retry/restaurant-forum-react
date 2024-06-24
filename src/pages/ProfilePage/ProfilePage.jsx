@@ -9,6 +9,10 @@ const ProfilePage = () => {
   const { userId } = useParams()
   const { isLoading, userProfile } = useGetUserProfile(userId)
 
+  if (!isLoading) {
+    console.log({ userProfile })
+  }
+
   return (
     <Stack px={3}>
       {
@@ -16,7 +20,7 @@ const ProfilePage = () => {
           ? (
           <Flex w={'100%'} justifyContent={'center'} >
             <Flex flexDir={{ base: 'column', md: 'row' }} w={'100%'} maxW={'500px'} gap={5}>
-              <Flex flex={1} w={'100%'} justifyContent={'end'} >
+              <Flex flex={1} w={'100%'} justifyContent={{ base: 'center', md: 'end' }} >
                 <SkeletonCircle w={20} h={20} />
               </Flex>
               <VStack flex={1.5} justifyContent={'center'} align={{ base: 'center', md: 'start' }}>

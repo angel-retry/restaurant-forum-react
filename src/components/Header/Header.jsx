@@ -157,7 +157,7 @@ const Header = () => {
             </DrawerBody>
 
             <DrawerFooter>
-              <Button colorScheme='red' variant='outline' w={'full'}>
+              <Button colorScheme='red' variant='outline' w={'full'} isLoading={isLogouting} onClick={() => logout()}>
                 Logout
               </Button>
             </DrawerFooter>
