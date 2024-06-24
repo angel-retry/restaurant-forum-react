@@ -9,10 +9,10 @@ const FeedsPage = () => {
     <Stack px={3} spacing={5}>
       <Heading>最新動態</Heading>
       <Flex w={'100%'} flexDir={{ base: 'column', md: 'row' }} gap={5} alignItems={'flex-start'}>
-        <HStack flex={1} >
+        <HStack flex={{ base: 'none', md: 1 }} w={'100%'} >
           <RestaurantsFeeds isLoading={isLoading} restaurants={feedsRestaurants} />
         </HStack>
-        <HStack flex={1} >
+        <HStack flex={{ base: 'none', md: 1 }} w={'100%'} >
           <CommentsFeeds />
         </HStack>
       </Flex>
