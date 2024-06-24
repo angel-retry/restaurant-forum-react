@@ -116,14 +116,16 @@ const Header = () => {
                   px={5}
                   _hover={{ bgColor: 'gray.100' }}
                   w={'full'}
+                  to={`/users/${authUser.id}`}
+                  onClick={() => onClose()}
                 >
                   <Box flex={0.5} display={'flex'} justifyContent={'center'}>
-                    <Avatar name='user' src='/cover.jpg' size={'sm'} />
+                    <Avatar name='user' src={authUser.avatar} size={'sm'} />
                   </Box>
                   <Text flex={2}
                     fontWeight={'bold'}
                   >
-                  user
+                  {authUser.name}
                   </Text>
                 </Link>
                 <Link
@@ -137,6 +139,7 @@ const Header = () => {
                   _hover={{ bgColor: 'gray.100' }}
                   w={'full'}
                   to='/restaurants/create'
+                  onClick={() => onClose()}
                 >
                   <Box flex={0.5} display={'flex'} justifyContent={'center'}>
                     <LuPencil fontSize={20} />
