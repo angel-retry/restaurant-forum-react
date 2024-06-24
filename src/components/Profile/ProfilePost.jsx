@@ -3,8 +3,8 @@ import { Link as RouterLink } from 'react-router-dom'
 
 const ProfilePost = ({ restaurant }) => {
   return (
-    <Card >
-      <Box h={{ sm: '250px', md: '350px' }}>
+    <Card variant={'outline'} >
+      <Box h={'250px'}>
         <Link as={RouterLink} to={`/restaurants/${restaurant.id}`}>
           <Image src={restaurant.image} w={'100%'} h={'100%'} objectFit={'cover'} />
         </Link>

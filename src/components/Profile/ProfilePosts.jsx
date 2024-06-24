@@ -30,7 +30,7 @@ const ProfilePosts = () => {
 
   return (
     <Stack px={3} mt={5}>
-      <Grid templateColumns={{ sm: 'repeat(1, 1fr)', md: 'repeat(3, 1fr)' }} gap={5}>
+      <Grid templateColumns={{ sm: 'repeat(1, 1fr)', md: 'repeat(3, 1fr)', lg: 'repeat(4, 1fr)' }} gap={5} >
         {
           restaurants.map(restaurant => (<ProfilePost key={restaurant.id} restaurant={restaurant} />))
         }

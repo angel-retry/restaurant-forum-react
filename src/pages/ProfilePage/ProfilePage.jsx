@@ -9,10 +9,6 @@ const ProfilePage = () => {
   const { userId } = useParams()
   const { isLoading, userProfile } = useGetUserProfile(userId)
 
-  if (!isLoading) {
-    console.log({ userProfile })
-  }
-
   return (
     <Stack px={3}>
       {

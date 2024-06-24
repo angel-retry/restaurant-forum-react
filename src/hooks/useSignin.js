@@ -20,28 +20,11 @@ const useSignin = () => {
     axios
       .post(URL, data)
       .then(res => {
-        const { token } = res.data
+        const { token, user } = res.data
         localStorage.setItem('authToken', token)
+        localStorage.setItem('authUser', JSON.stringify(user))
+        setAuthUser(user)
         setAuthToken(token)
-
-        axios
-          .get(`${baseURL}/auth/user`, {
-            headers: {
-              Authorization: `Bearer ${token}`
-            }
-          })
-          .then(res => {
-            const { authUser } = res.data
-            console.log(authUser)
-            localStorage.setItem('authUser', JSON.stringify(authUser))
-            setAuthUser(authUser)
-            setError(null)
-          })
-          .catch(err => {
-            const { message } = err.response.data
-            showToast('Error', message, 'error')
-            setError(message)
-          })
       })
       .catch(err => {
         const { message } = err.response.data
