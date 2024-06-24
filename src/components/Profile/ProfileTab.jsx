@@ -6,8 +6,6 @@ import useTabStore from '../../store/tabStore'
 
 const ProfileTab = () => {
   const setCurrentProfileTab = useTabStore(state => state.setCurrentProfileTab)
-  const currentProfileTab = useTabStore(state => state.currentProfileTab)
-  console.log(currentProfileTab)
 
   return (
     <Tabs position='relative' variant='unstyled' borderBottom={'1px solid'} borderColor={'gray.300'} align='center' mt={10} >
