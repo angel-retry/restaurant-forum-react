@@ -14,12 +14,31 @@ const CommentsFeeds = () => {
 
       <CardBody>
         {
-          !isLoading && (
+          isLoading
+            ? (
+            <Stack divider={<StackDivider />}>
+                {
+                  Array.from({ length: 10 }, (_, i) => (
+                    <Flex key={i} w={'100%'} flexDir={{ base: 'column', md: 'row' }} gap={5} py={3}>
+                      <Box w={'100%'}>
+                        <Skeleton w={'100%'} h={{ base: '200px' }} />
+                      </Box>
+                      <VStack w={'100%'} align={'flex-start'} alignSelf={'center'} spacing={5}>
+                        <Skeleton w={'80%'} h={{ base: '25px' }} />
+                        <Skeleton w={'95%'} h={{ base: '15px' }} />
+                        <Skeleton w={'95%'} h={{ base: '15px' }} />
+                      </VStack>
+                    </Flex>
+                  ))
+                }
+              </Stack>
+              )
+            : (
             <Stack spacing='4' divider={<StackDivider />}>
               {
                 isLoading
                   ? (
-                  <>
+                  <Stack spacing='4' divider={<StackDivider />}>
                     {
                       Array.from({ length: 10 }, (_, i) => (
                         <Flex key={i} w={'100%'} flexDir={{ base: 'column', md: 'row' }} gap={5} mb={5}>
@@ -34,10 +53,10 @@ const CommentsFeeds = () => {
                         </Flex>
                       ))
                     }
-                  </>
+                  </Stack>
                     )
                   : (
-                  <>
+                  <Stack spacing='4' divider={<StackDivider />}>
                     {
                       feedsComments.map(comment => (
                         <Flex flexDir={{ base: 'column', lg: 'row' }} gap={3} key={comment.id} py={4} >
@@ -80,12 +99,12 @@ const CommentsFeeds = () => {
                         </Flex>
                       ))
                     }
-                  </>
+                  </Stack>
                     )
               }
             </Stack>
-          )
-        }\
+              )
+        }
       </CardBody>
     </Card>
   )

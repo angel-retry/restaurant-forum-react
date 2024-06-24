@@ -10,14 +10,13 @@ const RestaurantsFeeds = ({ isLoading, restaurants }) => {
         <Heading size='md'>最新餐廳貼文</Heading>
       </CardHeader>
       <CardBody>
-        <Stack divider={<StackDivider />} spacing={10} >
           {
             isLoading
               ? (
-              <>
+              <Stack divider={<StackDivider />}>
                 {
                   Array.from({ length: 10 }, (_, i) => (
-                    <Flex key={i} w={'100%'} flexDir={{ base: 'column', md: 'row' }} gap={5} mb={5}>
+                    <Flex key={i} w={'100%'} flexDir={{ base: 'column', md: 'row' }} gap={5} py={3}>
                       <Box w={'100%'}>
                         <Skeleton w={'100%'} h={{ base: '200px' }} />
                       </Box>
@@ -29,14 +28,14 @@ const RestaurantsFeeds = ({ isLoading, restaurants }) => {
                     </Flex>
                   ))
                 }
-              </>
+              </Stack>
                 )
               : (
-              <>
+              <Stack divider={<StackDivider />}>
                 {
                   restaurants.map(restaurant => (
                     <Flex flexDir={{ base: 'column', lg: 'row' }} gap={3} key={restaurant.id}>
-                      <Box w={'100%'} h={{ base: '200px', lg: 'auto' }} flex={{ base: 'none', lg: 1 }}>
+                      <Box w={'100%'} h={{ base: '200px', lg: 'auto' }} flex={{ base: 'none', lg: 1 }}py={3}>
                         <Image src={restaurant.image} h={'100%'} w={'100%'} objectFit={'cover'} alt={`${restaurant.name} image`} />
                       </Box>
                       <VStack align={'flex-start'} p={3} spacing={5} flex={1}>
@@ -75,10 +74,9 @@ const RestaurantsFeeds = ({ isLoading, restaurants }) => {
                     </Flex>
                   ))
                 }
-              </>
+              </Stack>
                 )
           }
-        </Stack>
       </CardBody>
     </Card>
 
