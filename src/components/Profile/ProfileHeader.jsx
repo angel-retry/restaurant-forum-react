@@ -1,15 +1,13 @@
 import { Avatar, Button, Flex, Heading, Stack, Text, VStack, HStack, Link } from '@chakra-ui/react'
 import { Link as RouterLink, useParams } from 'react-router-dom'
 import useAuthTokenStore from '../../store/authTokenStore'
-import useUserProfileStore from '../../store/userProfileStore'
 import useFollowUser from '../../hooks/useFollowUser'
 
-const ProfileHeader = () => {
+const ProfileHeader = ({ userProfile }) => {
   const userId = Number(useParams().userId)
   const authUser = useAuthTokenStore(state => state.authUser)
   const isAuthUser = userId === authUser.id
-  const { userProfile } = useUserProfileStore()
-  const { followersCount, isFollowed, handleFollowUser, isLoading } = useFollowUser(userProfile)
+  const { followersCount, isFollowed, handleFollowUser, isLoading: isFollowing } = useFollowUser(userProfile)
 
   return (
     <Stack>
@@ -25,7 +23,7 @@ const ProfileHeader = () => {
                 </Link>
                 )
               : (
-              <Button colorScheme='blue' isLoading={isLoading} onClick={handleFollowUser}>
+              <Button colorScheme='blue' isLoading={isFollowing} onClick={handleFollowUser}>
                 {
                   isFollowed ? '取消追蹤' : '追蹤'
                 }
