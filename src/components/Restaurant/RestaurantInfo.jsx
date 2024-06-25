@@ -1,10 +1,11 @@
-import { Box, Button, Flex, Heading, HStack, Image, Tag, Text, VStack, Wrap } from '@chakra-ui/react'
+import { Box, Button, Flex, Heading, HStack, Image, Tag, Text, VStack, Wrap, Link } from '@chakra-ui/react'
 import { FaHeart, FaRegCommentDots, FaRegHeart } from 'react-icons/fa'
 import { RiMapPin2Fill } from 'react-icons/ri'
 import useSaveRestaurant from '../../hooks/useSaveRestaurant'
 import useLikeRestaurant from '../../hooks/useLikeRestaurant'
 import { GoBookmark, GoBookmarkFill } from 'react-icons/go'
 import { MdOutlineRemoveRedEye } from 'react-icons/md'
+import { Link as RouterLink } from 'react-router-dom'
 
 const RestaurantInfo = ({ restaurant }) => {
   const { isLoading, postLike, isLiked, likes } = useLikeRestaurant(restaurant)
@@ -55,9 +56,11 @@ const RestaurantInfo = ({ restaurant }) => {
             <Text minW={'40px'}>地址:</Text>
             <Wrap>
               <Text>{restaurant.address}</Text>
-              <Box color='blue.500'>
-                <RiMapPin2Fill size={20} />
-              </Box>
+              <Link as={RouterLink} to={restaurant.addressUrl} target='_blank'>
+                <Box color='blue.500'>
+                  <RiMapPin2Fill size={20} />
+                </Box>
+              </Link>
             </Wrap>
           </HStack>
         </VStack>
