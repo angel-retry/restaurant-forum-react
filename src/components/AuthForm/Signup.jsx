@@ -1,8 +1,9 @@
 import * as yup from 'yup'
-import { Button, FormControl, FormErrorMessage, Heading, Input, Stack } from '@chakra-ui/react'
+import { Alert, AlertDescription, AlertIcon, AlertTitle, Button, FormControl, FormErrorMessage, Heading, Input, Stack } from '@chakra-ui/react'
 import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import useShowToast from '../../hooks/useShowToast'
+import useSignup from '../../hooks/useSignup'
 
 const schema = yup.object({
   email: yup.string().email('信箱格式不對').required('請填入信箱'),
@@ -17,8 +18,10 @@ const schema = yup.object({
   confirmPassword: yup.string().oneOf([yup.ref('password')], '密碼輸入不相同').required('請輸入確認密碼')
 }).required()
 
-const Signup = () => {
+const Signup = ({ setIsLogin }) => {
   const showToast = useShowToast()
+
+  const { isSignuping, error: errorMessage, signup } = useSignup(setIsLogin)
 
   const { register, handleSubmit, formState: { errors } } = useForm({
     reValidateMode: 'onChange',
@@ -27,7 +30,7 @@ const Signup = () => {
 
   const onSumbit = async (data) => {
     try {
-      console.log({ data })
+      await signup(data)
     } catch (error) {
       return showToast('Error', error.message, 'error')
     }
@@ -58,7 +61,16 @@ const Signup = () => {
           <Input type="password" placeholder='confirmPassword' name='confirmPassword' {...register('confirmPassword')}/>
           <FormErrorMessage>{errors.confirmPassword?.message}</FormErrorMessage>
         </FormControl>
-        <Button colorScheme={'blue'} variant={'solid'} marginTop={3} onClick={handleSubmit(onSumbit, onError)} isDisabled={errors?.email || errors?.password || errors?.name || errors?.confirmPassword}>
+
+        {errorMessage && (
+            <Alert status='error'>
+              <AlertIcon />
+              <AlertTitle>Error</AlertTitle>
+              <AlertDescription fontWeight={'bold'}>{errorMessage}</AlertDescription>
+            </Alert>
+        )}
+
+        <Button colorScheme={'blue'} variant={'solid'} marginTop={3} onClick={handleSubmit(onSumbit, onError)} isDisabled={errors?.email || errors?.password || errors?.name || errors?.confirmPassword} isLoading={isSignuping}>
           Sign up
         </Button>
       </Stack>

@@ -12,7 +12,7 @@ const AuthPage = () => {
       <Flex p={8} flex={1} align={'center'} justify={'center'}>
         <Stack spacing={4} w={'full'} maxW={'md'}>
           {
-            isLogin ? <Login/> : <Signup/>
+            isLogin ? <Login/> : <Signup setIsLogin={setIsLogin} />
           }
           <HStack spacing={0} justify={'end'}>
               <Box>
