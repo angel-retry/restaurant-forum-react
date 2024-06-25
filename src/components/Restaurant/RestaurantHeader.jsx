@@ -5,12 +5,15 @@ import { Link as RouterLink } from 'react-router-dom'
 import { FaTrashAlt } from 'react-icons/fa'
 import useDeleteRestaurant from '../../hooks/useDeleteRestaurant'
 import useShowToast from '../../hooks/useShowToast'
+import useFollowUser from '../../hooks/useFollowUser'
 
 const RestaurantHeader = ({ restaurant }) => {
   const authUser = useAuthTokenStore(state => state.authUser)
   const isAuthUser = authUser.id === restaurant.CreatedBy.id
   const { isDeleting, deleteRestaurant } = useDeleteRestaurant(restaurant.id)
   const showToast = useShowToast()
+
+  const { isFollowed, handleFollowUser, isLoading } = useFollowUser(restaurant.CreatedBy)
 
   const handleDeleting = async () => {
     if (!isAuthUser) {
@@ -41,7 +44,13 @@ const RestaurantHeader = ({ restaurant }) => {
                   <Button colorScheme='green' size={{ base: 'sm', md: 'md' }}>編輯餐廳</Button>
                 </Link>
                 )
-              : (<Button colorScheme='blue'> follow</Button>)
+              : (
+                <Button colorScheme='blue' onClick={handleFollowUser} isLoading={isLoading}>
+                  {
+                    isFollowed ? '取消追隨' : '追蹤'
+                  }
+                </Button>
+                )
 
           }
 
