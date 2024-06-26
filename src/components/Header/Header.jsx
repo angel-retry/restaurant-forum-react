@@ -1,5 +1,5 @@
-import { CloseIcon, HamburgerIcon } from '@chakra-ui/icons'
-import { Avatar, Box, Button, Drawer, DrawerBody, DrawerCloseButton, DrawerContent, DrawerFooter, DrawerHeader, DrawerOverlay, Flex, HStack, IconButton, Link, Text, useDisclosure, VStack } from '@chakra-ui/react'
+import { CloseIcon, HamburgerIcon, MoonIcon, SunIcon } from '@chakra-ui/icons'
+import { Avatar, Box, Button, Drawer, DrawerBody, DrawerCloseButton, DrawerContent, DrawerFooter, DrawerHeader, DrawerOverlay, Flex, HStack, IconButton, Link, Text, useColorMode, useColorModeValue, useDisclosure, VStack } from '@chakra-ui/react'
 import DrawerNavLink from './DrawerNavLink'
 import { Link as RouterLink } from 'react-router-dom'
 import { BiCrown, BiHomeAlt, BiLike } from 'react-icons/bi'
@@ -15,6 +15,7 @@ const Header = () => {
   const { logout, isLogouting } = useLogout()
   const authUser = useAuthTokenStore(state => state.authUser)
   const setCurrentPage = usePaginationStore(state => state.setCurrentPage)
+  const { colorMode, toggleColorMode } = useColorMode()
 
   const Links = [
     {
@@ -44,29 +45,33 @@ const Header = () => {
     }
   ]
   return (
-    <Box bg={'gray.100'} px={4} position={'fixed'} zIndex={2} w={'full'}>
+    <Box bg={useColorModeValue('gray.100', 'gray.900')} px={4} position={'fixed'} zIndex={2} w={'full'}>
       <Flex h={16} alignItems={'center'} justifyContent={'space-between'}>
         <HStack spacing={8} alignItems={'center'}>
           <Link as={RouterLink} to={'/restaurants'} fontSize={'lg'} fontWeight={'bold'} _hover={{ textDecoration: 'none' }}>餐廳論壇</Link>
           <HStack as={'nav'} spacing={6} display={{ base: 'none', md: 'flex' }}>
             {Links.map((link) => (
-              <Link as={RouterLink} key={link.id} to={link.to} onClick={() => setCurrentPage(1)} _hover={{ textDecoration: 'none', color: 'black' }} color={'gray.500'}>{link.label}</Link>
+              <Link as={RouterLink} key={link.id} to={link.to} onClick={() => setCurrentPage(1)} _hover={{ textDecoration: 'none', color: useColorModeValue('black', 'white') }} color={'gray.500'}>{link.label}</Link>
             ))}
           </HStack>
         </HStack>
-        <IconButton
-          size={'md'}
-          icon={isOpen ? <CloseIcon /> : <HamburgerIcon />}
-          aria-label={'Open Menu'}
-          display={{ md: 'none' }}
-          onClick={isOpen ? onClose : onOpen}
-        />
+        <HStack display={{ md: 'none' }}>
+          <Button onClick={toggleColorMode} mr={3}>
+              {colorMode === 'light' ? <MoonIcon /> : <SunIcon />}
+          </Button>
+          <IconButton
+            size={'md'}
+            icon={isOpen ? <CloseIcon /> : <HamburgerIcon />}
+            aria-label={'Open Menu'}
+            onClick={isOpen ? onClose : onOpen}
+          />
+        </HStack>
         <HStack spacing={5} display={{ base: 'none', md: 'flex' }}>
           <Link
             as={RouterLink}
             to='/restaurants/create'
           >
-            <Button colorScheme='green' variant={'outline'} gap={'3'} _hover={{ bg: 'green', color: 'white' }}>
+            <Button colorScheme='green' variant={'outline'} gap={'3'} _hover={{ bg: 'green.400', color: 'white' }}>
               <FaPen size={'16px'} />
               <Box display={{ md: 'none', lg: 'flex' }}>
               建立餐廳
@@ -83,6 +88,9 @@ const Header = () => {
               <Text>{authUser.name}</Text>
             </HStack>
           </Link>
+          <Button onClick={toggleColorMode}>
+            {colorMode === 'light' ? <MoonIcon /> : <SunIcon />}
+          </Button>
           <Button
             colorScheme='red'
             variant='outline'
@@ -114,7 +122,7 @@ const Header = () => {
                   gap={5}
                   py={15}
                   px={5}
-                  _hover={{ bgColor: 'gray.100' }}
+                  _hover={{ bgColor: useColorModeValue('gray.100', 'gray.900') }}
                   w={'full'}
                   to={`/users/${authUser.id}`}
                   onClick={() => onClose()}
@@ -136,7 +144,7 @@ const Header = () => {
                   gap={5}
                   py={15}
                   px={5}
-                  _hover={{ bgColor: 'gray.100' }}
+                  _hover={{ bgColor: useColorModeValue('gray.100', 'gray.900') }}
                   w={'full'}
                   to='/restaurants/create'
                   onClick={() => onClose()}

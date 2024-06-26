@@ -1,4 +1,4 @@
-import { Text, Link, Box } from '@chakra-ui/react'
+import { Text, Link, Box, useColorModeValue } from '@chakra-ui/react'
 import { Link as RouterLink } from 'react-router-dom'
 
 const DrawerNavLink = ({ link, onClose }) => {
@@ -13,7 +13,7 @@ const DrawerNavLink = ({ link, onClose }) => {
       gap={5}
       py={15}
       px={5}
-      _hover={{ bgColor: 'gray.100' }}
+      _hover={{ bgColor: useColorModeValue('gray.100', 'gray.900') }}
       w={'full'}
       onClick={() => onClose()}
     >
