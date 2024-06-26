@@ -4,7 +4,7 @@ import UserList from './UserList'
 const UserRelations = ({ users }) => {
   console.log({ users })
   return (
-    <VStack spacing={5} maxH={'300px'} minHeight={'300px'} overflowY={'scroll'} px={3}>
+    <VStack spacing={5} maxH={'300px'} minHeight={'300px'} overflowY={'auto'} px={3}>
       {
         users.length > 0 && users.map(userId => (
           <UserList key={userId} userId={userId} />
