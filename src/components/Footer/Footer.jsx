@@ -1,8 +1,8 @@
-import { Stack, Text } from '@chakra-ui/react'
+import { Stack, Text, useColorModeValue } from '@chakra-ui/react'
 
 const Footer = () => {
   return (
-    <Stack bg={'gray.100'} py={3} mt={5} >
+    <Stack bg={useColorModeValue('gray.100', 'gray.900')} py={3} mt={5} >
       <Text color={'gray.500'} textAlign={'center'}>made in 2024</Text>
     </Stack>
   )
