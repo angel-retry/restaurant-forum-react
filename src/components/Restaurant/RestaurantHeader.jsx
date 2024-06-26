@@ -30,10 +30,14 @@ const RestaurantHeader = ({ restaurant }) => {
 
   return (
     <HStack spacing={5} borderBottom={'1px solid'} borderColor={'gray.300'} width={'100%'} pb={5}>
-      <Avatar src='/cover.jpg' size={'lg'} />
+      <Link as={RouterLink} to={`/users/${restaurant.CreatedBy.id}`} _hover={{ textDecoration: 'none' }}>
+        <Avatar src='/cover.jpg' size={'lg'} />
+      </Link>
       <VStack align='flex-start'>
         <HStack spacing={5}>
-          <Text>{restaurant.CreatedBy.name}</Text>
+          <Link as={RouterLink} to={`/users/${restaurant.CreatedBy.id}`} _hover={{ textDecoration: 'none' }}>
+            <Text>{restaurant.CreatedBy.name}</Text>
+          </Link>
           {
             isAuthUser
               ? (
