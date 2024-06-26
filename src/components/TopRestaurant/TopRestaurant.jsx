@@ -13,13 +13,13 @@ const TopRestaurant = ({ restaurant, index }) => {
 
   return (
     <VStack spacing={10}>
-      <Card variant={'outline'} display={'flex'} direction={{ base: 'column', md: 'row' }} boxShadow='md'>
+      <Card variant={'outline'} display={'flex'} direction={{ base: 'column', md: 'row' }} boxShadow='md' >
         <Box w={'100%'} h={{ base: 200, md: 400 }} flex={{ base: 'none', md: 1 }}>
           <Image src={restaurant.image} h={'100%'} w={'100%'} objectFit={'cover'} alt={`${restaurant.name} image`} />
         </Box>
-        <CardBody flex={1} alignSelf={'center'}>
+        <CardBody flex={{ base: 'none', md: 1 }} alignSelf={'center'} w={{ base: 'auto', lg: '1000px' }} >
           <VStack align={'flex-start'} spacing={3} >
-            <HStack justify="space-between" w={'full'}>
+            <HStack justify="space-between" w={'100%'}>
               <Text fontWeight={'bold'} color={'gray.500'}>No {index + 1}</Text>
               <Button variant={'ghost'} _hover={{ bg: 'transparant' }} p={0} onClick={postSave} isLoading={isSaving}>
                 {
@@ -49,7 +49,7 @@ const TopRestaurant = ({ restaurant, index }) => {
               </HStack>
             </HStack>
 
-            <Text>{restaurant.introduction}</Text>
+            <Text >{restaurant.introduction}</Text>
 
             <Link
               display={'flex'}
