@@ -4,13 +4,15 @@ import useAuthTokenStore from '../../store/authTokenStore'
 import useFollowUser from '../../hooks/useFollowUser'
 import { useState } from 'react'
 import UserRelations from '../UserRelations/UserRelations'
+import useUserProfileStore from '../../store/userProfileStore'
 
-const ProfileHeader = ({ userProfile }) => {
+const ProfileHeader = () => {
   const userId = Number(useParams().userId)
   const authUser = useAuthTokenStore(state => state.authUser)
   const isAuthUser = userId === authUser.id
+  const userProfile = useUserProfileStore(state => state.userProfile)
 
-  const { followersCount, isFollowed, handleFollowUser, isLoading: isFollowing } = useFollowUser(userProfile)
+  const { isFollowed, handleFollowUser, isLoading: isFollowing } = useFollowUser(userProfile)
 
   const { isOpen, onOpen, onClose } = useDisclosure()
   const [defaultIndex, setDefaultIndex] = useState(0)
@@ -48,7 +50,7 @@ const ProfileHeader = ({ userProfile }) => {
                 }
                 cursor={'pointer'}
               >
-                {followersCount} 位粉絲
+                {userProfile.Followers.length} 位粉絲
               </Text>
               <Text
                 onClick={
@@ -73,10 +75,10 @@ const ProfileHeader = ({ userProfile }) => {
         <ModalOverlay />
         <ModalContent>
           <ModalCloseButton />
-          <ModalBody pt={10}>
+          <ModalBody pt={10} px={3}>
             <Tabs align='center' variant='unstyled' defaultIndex={defaultIndex} position='relative'>
               <TabList>
-                <Tab flex={1} >{followersCount} 位粉絲</Tab>
+                <Tab flex={1} >{userProfile.Followers.length} 位粉絲</Tab>
                 <Tab flex={1} >{userProfile.Followings.length} 位追蹤中</Tab>
               </TabList>
               <TabIndicator mt='-1.5px' height='2px' bg='blue.500' borderRadius='1px' />
@@ -85,7 +87,7 @@ const ProfileHeader = ({ userProfile }) => {
                   <UserRelations users={userProfile.Followers} />
                 </TabPanel>
                 <TabPanel>
-                  <p>two!</p>
+                  <UserRelations users={userProfile.Followings} />
                 </TabPanel>
               </TabPanels>
               </Tabs>

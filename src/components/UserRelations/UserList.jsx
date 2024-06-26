@@ -1,12 +1,26 @@
-import { Avatar, Button, HStack, Text } from '@chakra-ui/react'
+import { HStack, Skeleton, SkeletonCircle } from '@chakra-ui/react'
+import useGetUser from '../../hooks/useGetUser'
+import User from './User'
 
-const UserList = ({ user }) => {
+const UserList = ({ userId }) => {
+  const { isLoading, user } = useGetUser(userId)
   return (
-    <HStack w={'100%'} spacing={5}>
-      <Avatar src={user.avatar} />
-      <Text>{user.name}</Text>
-      <Button colorScheme='blue' ml={'auto'}>Follow</Button>
-    </HStack>
+    <>
+      {
+        isLoading
+          ? (
+          <HStack w={'100%'} spacing={5}>
+            <SkeletonCircle size={'60px'} />
+            <Skeleton w={'100px'} h={'20px'} />
+            <Skeleton w={'80px'} h={'40px'} ml={'auto'} />
+          </HStack>
+            )
+          : (
+            <User user={user} />
+            )
+      }
+    </>
+
   )
 }
 

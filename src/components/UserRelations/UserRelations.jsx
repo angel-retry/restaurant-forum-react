@@ -1,14 +1,23 @@
-import { VStack } from '@chakra-ui/react'
+import { Text, VStack } from '@chakra-ui/react'
 import UserList from './UserList'
+import { LuUserPlus2 } from 'react-icons/lu'
 
 const UserRelations = ({ users }) => {
   console.log({ users })
   return (
-    <VStack spacing={5}>
+    <VStack spacing={5} maxH={'300px'} minHeight={'300px'} overflowY={'scroll'} px={3}>
       {
-        users.map(user => (
-          <UserList key={user.id} user={user} />
+        users.length > 0 && users.map(userId => (
+          <UserList key={userId} userId={userId} />
         ))
+      }
+      {
+        users.length === 0 && (
+          <VStack w={'100%'} h={'100%'} my={'auto'}>
+            <Text fontWeight={'bold'} color={'gray.400'}>沒有任何使用者</Text>
+          </VStack>
+        )
+
       }
     </VStack>
 

@@ -7,7 +7,7 @@ import useGetUserProfile from '../../hooks/useGetUserProfile'
 
 const ProfilePage = () => {
   const { userId } = useParams()
-  const { isLoading, userProfile } = useGetUserProfile(userId)
+  const { isLoading } = useGetUserProfile(userId)
 
   return (
     <Stack px={3}>
@@ -28,7 +28,7 @@ const ProfilePage = () => {
           </Flex>
             )
           : (
-          <ProfileHeader userProfile={userProfile} />
+          <ProfileHeader />
             )
       }
 
