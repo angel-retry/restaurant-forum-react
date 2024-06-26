@@ -2,10 +2,13 @@ import { Box, Button, Flex, HStack, Image, Stack, Text } from '@chakra-ui/react'
 import { useState } from 'react'
 import Login from '../../components/AuthForm/Login'
 import Signup from '../../components/AuthForm/Signup'
+import useSigninWithGoogle from '../../hooks/useSigninWithGoogle'
 
 const AuthPage = () => {
   const [isLogin, setIsLogin] = useState(true)
   console.log(isLogin)
+
+  const { isLoading, signinWithGoogle } = useSigninWithGoogle()
 
   return (
     <Stack h={'100vh'} direction={'row'}>
@@ -33,9 +36,10 @@ const AuthPage = () => {
             <Box flex={2} h={'1px'} bg={'gray.400'}></Box>
           </Flex>
 
-          <Button colorScheme='red'>
+          <Button colorScheme='red' w={'100%'} isLoading={isLoading} onClick={signinWithGoogle}>
             Google {isLogin ? '註冊' : '登入'}
           </Button>
+
         </Stack>
       </Flex>
       <Flex flex={1} display={{ base: 'none', md: 'flex' }}>

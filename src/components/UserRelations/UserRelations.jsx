@@ -1,6 +1,5 @@
 import { Text, VStack } from '@chakra-ui/react'
 import UserList from './UserList'
-import { LuUserPlus2 } from 'react-icons/lu'
 
 const UserRelations = ({ users }) => {
   console.log({ users })

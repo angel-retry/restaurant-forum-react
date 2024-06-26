@@ -12,6 +12,7 @@ import CreateRestaurantPage from './pages/RestaurantFormPage/CreateRestaurantPag
 import RestaurantPage from './pages/RestaurantPage/RestaurantPage'
 import useAuthTokenStore from './store/authTokenStore'
 import EditRestaurantPage from './pages/RestaurantFormPage/EditRestaurantPage'
+import GoogleAuthCallBack from './components/AuthForm/GoogleAuthCallBack'
 import { useEffect } from 'react'
 
 function App () {
@@ -45,6 +46,7 @@ function App () {
             : (
             <>
               <Route path='/auth' element={<AuthPage />} />
+              <Route path='/auth/callback/google' element={<GoogleAuthCallBack />} />
               <Route path='*' element={<Navigate to={'/auth'}/>} />
             </>
               )
