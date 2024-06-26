@@ -11,7 +11,7 @@ const Restaurant = ({ restaurant }) => {
   const { isLoading: isSaving, postSave, isSaved } = useSaveRestaurant(restaurant)
 
   return (
-    <Card borderRadius='lg' variant='outline'>
+    <Card borderRadius='lg' variant='outline' h={'480px'}>
       <Link as={RouterLink} to={`/restaurants/${restaurant.id}`}>
         <Box w={'full'} height={'250px'}>
           <Image objectFit={'cover'} w={'full'} h={'full'}
