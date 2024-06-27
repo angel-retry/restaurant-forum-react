@@ -38,7 +38,7 @@ const Restaurants = ({ restaurants, isLoading }) => {
           : (
               <>
                 {
-                  restaurantsData.length > 0
+                  restaurantsData && restaurantsData.length > 0
                     ? (
                         <Grid
                           templateRows='repeat(1, 1fr)'

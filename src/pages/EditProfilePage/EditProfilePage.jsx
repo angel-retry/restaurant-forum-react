@@ -1,4 +1,4 @@
-import { Avatar, Button, FormControl, FormLabel, Heading, HStack, Input, Stack, Textarea, VStack } from '@chakra-ui/react'
+import { Avatar, Button, FormControl, FormLabel, Heading, HStack, Input, SkeletonCircle, Stack, Textarea, VStack } from '@chakra-ui/react'
 import { useRef, useState } from 'react'
 import useAuthTokenStore from '../../store/authTokenStore'
 import usePostUserProfileAvatar from '../../hooks/usePostUserProfileAvatar'
@@ -48,7 +48,7 @@ const EditProfilePage = () => {
         <Heading fontSize={{ base: '2xl', md: '3xl' }}>修改個人資料</Heading>
         <HStack spacing={5}>
           {
-            !isAvatarLoading && (<Avatar src={avatarURL || authUser.avatar } size={{ base: 'lg', md: 'xl' }} name='user' />)
+            isAvatarLoading ? <SkeletonCircle size={{ base: '70px', md: '100px' }} /> : <Avatar src={avatarURL || authUser.avatar } size={{ base: 'lg', md: 'xl' }} name={authUser.name} />
           }
 
           <Input type='file' hidden ref={fileRef} onChange={handleAvatarChange} />
@@ -80,7 +80,7 @@ const EditProfilePage = () => {
         </FormControl>
 
         <HStack w={'full'}justifyContent={'flex-end'}>
-          <Button w={{ base: '20%', md: '30%' }}>Back</Button>
+          <Button w={{ base: '20%', md: '30%' }} onClick={() => navigate(-1)}>Back</Button>
           <Button w={{ base: '20%', md: '30%' }} colorScheme='blue' onClick={handleEditProfile} isLoading={isLoading}>修改</Button>
         </HStack>
       </VStack>

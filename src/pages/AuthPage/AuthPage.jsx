@@ -7,7 +7,6 @@ import useSigninWithGoogle from '../../hooks/useSigninWithGoogle'
 const AuthPage = () => {
   const [isLogin, setIsLogin] = useState(true)
   console.log(isLogin)
-
   const { isLoading, signinWithGoogle } = useSigninWithGoogle()
 
   return (

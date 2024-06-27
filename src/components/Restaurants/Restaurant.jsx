@@ -11,7 +11,7 @@ const Restaurant = ({ restaurant }) => {
   const { isLoading: isSaving, postSave, isSaved } = useSaveRestaurant(restaurant)
 
   return (
-    <Card borderRadius='lg' variant='outline' h={'480px'}>
+    <Card borderRadius='lg' variant='outline' h={{ base: 'auto', md: '520px', lg: '480px' }}>
       <Link as={RouterLink} to={`/restaurants/${restaurant.id}`}>
         <Box w={'full'} height={'250px'}>
           <Image objectFit={'cover'} w={'full'} h={'full'}
@@ -53,7 +53,7 @@ const Restaurant = ({ restaurant }) => {
             <Heading size='md'>{restaurant.name}</Heading>
           </Link>
           <Tag colorScheme={'teal'} size={'md'} variant='solid' py={2}>{restaurant.Category.name}</Tag>
-          <Text>
+          <Text pb={{ base: 3, md: 0 }}>
           {restaurant.introduction}
         </Text>
       </VStack>

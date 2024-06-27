@@ -8,7 +8,6 @@ const usePostRestaurantImage = () => {
   const [imageURL, setImageURL] = useState(null)
   const URL = `${baseURL}/restaurants/image`
   const authToken = useAuthTokenStore(state => state.authToken)
-  const url = 'http://localhost:3000'
 
   const handleImageChange = (e) => {
     const file = e.target.files[0]
@@ -27,7 +26,7 @@ const usePostRestaurantImage = () => {
       })
       .then(res => {
         const { filePath } = res.data
-        setImageURL(`${url}${filePath}`)
+        setImageURL(filePath)
       })
       .catch(err => console.error(err))
       .finally(() => {

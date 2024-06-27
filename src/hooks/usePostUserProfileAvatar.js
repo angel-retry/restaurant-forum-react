@@ -8,7 +8,6 @@ const usePostUserProfileAvatar = () => {
   const [avatarURL, setAvatarURL] = useState(null)
   const URL = `${baseURL}/users/avatar`
   const authToken = useAuthTokenStore(state => state.authToken)
-  const url = 'http://localhost:3000'
 
   const handleAvatarChange = (e) => {
     const file = e.target.files[0]
@@ -27,7 +26,7 @@ const usePostUserProfileAvatar = () => {
       })
       .then(res => {
         const { filePath } = res.data
-        setAvatarURL(`${url}${filePath}`)
+        setAvatarURL(filePath)
       })
       .catch(err => console.error(err))
       .finally(() => {
