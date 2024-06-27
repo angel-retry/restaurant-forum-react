@@ -14,7 +14,6 @@ const AuthCallback = () => {
     const query = new URLSearchParams(location.search)
     const token = query.get('token')
     const user = query.get('user')
-    console.log({ token, user })
 
     if (token && user) {
       localStorage.setItem('authToken', token)

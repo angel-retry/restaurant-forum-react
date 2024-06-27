@@ -6,7 +6,6 @@ import useSigninWithGoogle from '../../hooks/useSigninWithGoogle'
 
 const AuthPage = () => {
   const [isLogin, setIsLogin] = useState(true)
-  console.log(isLogin)
   const { isLoading, signinWithGoogle } = useSigninWithGoogle()
 
   return (
@@ -36,7 +35,7 @@ const AuthPage = () => {
           </Flex>
 
           <Button colorScheme='red' w={'100%'} isLoading={isLoading} onClick={signinWithGoogle}>
-            Google {isLogin ? '註冊' : '登入'}
+            Google {isLogin ? '登入' : '註冊'}
           </Button>
 
         </Stack>
