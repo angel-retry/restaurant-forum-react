@@ -69,11 +69,15 @@ const CommentsFeeds = () => {
                             </Heading>
                             <Tag colorScheme={'teal'} size={'md'} variant='solid' py={2}>{comment.Restaurant.Category.name}</Tag>
                             <HStack>
-                              <Avatar src={comment.User.avatar} name={comment.User.name} alt={`${comment.User.name} avatar`} />
+                              <Link as={RouterLink} to={`/users/${comment.User.id}`} _hover={{ textDecoration: 'none' }}>
+                                <Avatar src={comment.User.avatar} name={comment.User.name} alt={`${comment.User.name} avatar`} />
+                              </Link>
                               <Flex direction={{ base: 'row', lg: 'column' }} gap={{ base: 3, lg: 0 }}>
-                                <Text>
-                                  {comment.User.name}
-                                </Text>
+                                <Link as={RouterLink} to={`/users/${comment.User.id}`} _hover={{ textDecoration: 'none' }}>
+                                  <Text>
+                                    {comment.User.name}
+                                  </Text>
+                                </Link>
                                 <Text>
                                   — {timeAgo(comment.createdAt)}評論
                                 </Text>

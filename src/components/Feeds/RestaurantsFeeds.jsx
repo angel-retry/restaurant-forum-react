@@ -40,11 +40,15 @@ const RestaurantsFeeds = ({ isLoading, restaurants }) => {
                       </Box>
                       <VStack align={'flex-start'} p={3} spacing={5} flex={1}>
                         <HStack>
-                          <Avatar src={restaurant.CreatedBy.avatar} name={restaurant.CreatedBy.name} alt={`${restaurant.CreatedBy.name} avatar`} />
+                          <Link as={RouterLink} to={`/users/${restaurant.CreatedBy.id}`} _hover={{ textDecoration: 'none' }}>
+                            <Avatar src={restaurant.CreatedBy.avatar} name={restaurant.CreatedBy.name} alt={`${restaurant.CreatedBy.name} avatar`} />
+                          </Link>
                           <Flex direction={{ base: 'row', lg: 'column' }} gap={{ base: 3, lg: 0 }}>
-                            <Text>
-                              {restaurant.CreatedBy.name}
-                            </Text>
+                            <Link as={RouterLink} to={`/users/${restaurant.CreatedBy.id}`} _hover={{ textDecoration: 'none' }}>
+                              <Text>
+                                {restaurant.CreatedBy.name}
+                              </Text>
+                            </Link>
                             <Text>
                               — {timeAgo(restaurant.createdAt)}分享
                             </Text>
