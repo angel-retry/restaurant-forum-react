@@ -45,7 +45,7 @@ password: 12345678
 ### 最新動態
 - 使用者可以查看最新建的餐廳以及最新的留言資訊。
 ### 顏色模式
-- 使用者可以選擇網站要light mode會dark mode。
+- 使用者可以選擇網站為 light / dark mode。
 
 ## Installing - 專案安裝流程
 1. 請git clone專案。
