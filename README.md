@@ -1,6 +1,8 @@
 # 餐廳論壇
 這個專案是透過react、chakra UI製作成的餐廳論壇網站，可以分享餐廳資訊和交流討論，下面有網站連結以及更詳細的功能介紹。
 
+這個專案有串接後端API，請參考[餐廳論壇API](https://github.com/angel-retry/restaurant-forum-api)。
+
 ## 網站連結
 [https://restaurant-forum-react.vercel.app/auth](https://restaurant-forum-react.vercel.app/auth)
 登入的時候可以使用一下帳號做登入
