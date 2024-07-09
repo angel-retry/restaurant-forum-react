@@ -1,6 +1,8 @@
 # 餐廳論壇
 這個專案是透過react、chakra UI製作成的餐廳論壇網站，可以分享餐廳資訊和交流討論，下面有網站連結以及更詳細的功能介紹。
 
+這個專案有串接後端API，請參考[餐廳論壇API](https://github.com/angel-retry/restaurant-forum-api)。
+
 ## 網站連結
 [https://restaurant-forum-react.vercel.app/auth](https://restaurant-forum-react.vercel.app/auth)
 登入的時候可以使用一下帳號做登入
@@ -43,7 +45,7 @@ password: 12345678
 ### 最新動態
 - 使用者可以查看最新建的餐廳以及最新的留言資訊。
 ### 顏色模式
-- 使用者可以選擇網站要light mode會dark mode。
+- 使用者可以選擇網站為 light / dark mode。
 
 ## Installing - 專案安裝流程
 1. 請git clone專案。
